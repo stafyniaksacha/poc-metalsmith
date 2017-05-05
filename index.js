@@ -11,6 +11,7 @@ const cleanCSS    = require('metalsmith-clean-css');
 const ancestry    = require('metalsmith-ancestry');
 const links       = require('metalsmith-relative-links');
 const hbtmd       = require('metalsmith-hbt-md');
+const sass        = require('metalsmith-sass');
 
 const handlebars = require('handlebars');
 const nodeStatic = require('node-static');
@@ -88,12 +89,17 @@ const build = (clean = false) => (done) => {
       match: '**/*.md',
       sortBy: 'title'
     }))
-    .use(cleanCSS({
-      files: 'assets/stylesheets/**/*.css',
-      cleanCSS: {
-        rebase: true
-      }
+    .use(sass({
+      //outputDir: 'assets/stylesheets/',
+      sourceMap: true,
+      sourceMapContents: true   // This will embed all the Sass contents in your source maps.
     }))
+    // .use(cleanCSS({
+    //   files: 'assets/stylesheets/**/*.css',
+    //   cleanCSS: {
+    //     rebase: true
+    //   }
+    // }))
     .use(hbtmd(handlebars, {
         pattern: '**/*.md'
     }))

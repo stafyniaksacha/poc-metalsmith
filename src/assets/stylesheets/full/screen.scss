@@ -1,0 +1,1375 @@
+@charset "utf-8";
+@import 'normalize';
+@import 'compass';
+@import 'variables';
+@import 'syntax';
+@import 'icon-font';
+
+/*
+Copyright 2008-2013 Concur Technologies, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may
+not use this file except in compliance with the License. You may obtain
+a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations
+under the License.
+*/
+
+////////////////////////////////////////////////////////////////////////////////
+// GENERAL STUFF
+////////////////////////////////////////////////////////////////////////////////
+
+html, body {
+  color: $main-text;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @extend %default-font;
+  background-color: white;
+  height: 100%;
+  -webkit-text-size-adjust: none; /* Never autoresize text */
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// TABLE OF CONTENTS
+////////////////////////////////////////////////////////////////////////////////
+
+#toc > ul > li > a > span {
+  float: right;
+  background-color: #2484FF;
+  border-radius: 40px;
+  width: 20px;
+}
+
+@mixin embossed-bg {
+  background:
+          linear-gradient(to bottom, rgba(#000, 0.2), rgba(#000, 0) 8px),
+          linear-gradient(to top, rgba(#000, 0.2), rgba(#000, 0) 8px),
+          linear-gradient(to bottom, rgba($nav-embossed-border-top, 1), rgba($nav-embossed-border-top, 0) 1.5px),
+          linear-gradient(to top, rgba($nav-embossed-border-bottom, 1), rgba($nav-embossed-border-bottom, 0) 1.5px),
+          $nav-subitem-bg;
+}
+
+.tocify-wrapper {
+  transition: left 0.3s ease-in-out;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  z-index: 30;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: $nav-width;
+  background-color: $nav-bg;
+  font-size: 15px;
+  font-weight: bold;
+
+  // language selector for mobile devices
+  .lang-selector {
+    display: none;
+    a {
+      padding-top: 0.5em;
+      padding-bottom: 0.5em;
+    }
+  }
+
+  // This is the logo at the top of the ToC
+  &>img {
+    display: block;
+  }
+
+  &>.search {
+    position: relative;
+
+    input {
+      background: $nav-bg;
+      border-width: 0 0 1px 0;
+      border-color: $search-box-border-color;
+      padding: 6px 0 6px 20px;
+      box-sizing: border-box;
+      margin: $nav-v-padding $nav-padding;
+      width: $nav-width - 65;
+      outline: none;
+      color: $nav-text;
+      border-radius: 0; /* ios has a default border radius */
+    }
+
+    &:before {
+      position: absolute;
+      top: 17px;
+      left: $nav-padding;
+      color: $nav-text;
+      @extend %icon-search;
+    }
+  }
+
+  img+.tocify {
+    margin-top: $logo-margin;
+  }
+
+  .search-results {
+    margin-top: 0;
+    box-sizing: border-box;
+    height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition-property: height, margin;
+    transition-duration: 180ms;
+    transition-timing-function: ease-in-out;
+    &.visible {
+      height: 30%;
+      margin-bottom: 1em;
+    }
+
+    @include embossed-bg;
+
+    li {
+      margin: 1em $nav-padding;
+      line-height: 1;
+    }
+
+    a {
+      color: $nav-text;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+  .tocify-item>a, .toc-footer li {
+    padding: 0 $nav-padding 0 $nav-padding;
+    display: block;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  // The Table of Contents is composed of multiple nested
+  // unordered lists.  These styles remove the default
+  // styling of an unordered list because it is ugly.
+  ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 28px;
+  }
+
+  li {
+    color: $nav-text;
+    /*transition-property: background;
+    transition-timing-function: linear;
+    transition-duration: 230ms;*/
+  }
+
+  // This is the currently selected ToC entry
+  .tocify-focus {
+    box-shadow: 0px 1px 0px $nav-active-shadow;
+    background-color: $nav-active-bg;
+    color: $nav-active-text;
+  }
+
+  // Subheaders are the submenus that slide open
+  // in the table of contents.
+  .tocify-subheader {
+    background-color: $nav-subitem-bg;
+    font-weight: 400;
+    .tocify-item>a {
+      padding-left: $nav-padding + $nav-indent;
+      font-size: 14px;
+    }
+
+    // for embossed look:
+    @include embossed-bg;
+    &>li:last-child {
+      box-shadow: none; // otherwise it'll overflow out of the subheader
+    }
+  }
+
+  .toc-footer {
+    padding: 1em 0;
+    margin-top: 1em;
+    border-top: 1px dashed $nav-footer-border-color;
+
+    li,a {
+      color: $nav-text;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    li {
+      font-size: 0.8em;
+      line-height: 1.7;
+      text-decoration: none;
+    }
+  }
+
+}
+
+// button to show navigation on mobile devices
+#nav-button {
+  span {
+    display: block;
+    $side-pad: $main-padding / 2 - 8px;
+    padding: $side-pad $side-pad $side-pad;
+    background-color: rgba($main-bg, 0.7);
+    transform-origin: 0 0;
+    transform: rotate(-90deg) translate(-100%, 0);
+    border-radius: 0 0 0 5px;
+  }
+  padding: 0 1.5em 5em 0; // increase touch size area
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  opacity: 0.7;
+  line-height: 16px;
+  img {
+    height: 16px;
+    vertical-align: bottom;
+  }
+
+  transition: left 0.3s ease-in-out;
+
+  &:hover { opacity: 1; }
+  &.open {left: $nav-width}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// PAGE LAYOUT AND CODE SAMPLE BACKGROUND
+////////////////////////////////////////////////////////////////////////////////
+
+.page-wrapper {
+  margin-left: $nav-width;
+  position: relative;
+  z-index: 10;
+  background-color: $main-bg;
+  min-height: 100%;
+
+  padding-bottom: 1px; // prevent margin overflow
+
+  // The dark box is what gives the code samples their dark background.
+  // It sits essentially under the actual content block, which has a
+  // transparent background.
+  // I know, it's hackish, but it's the simplist way to make the left
+  // half of the content always this background color.
+  .dark-box {
+    background-color: $examples-bg;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .lang-selector {
+    position: fixed;
+    z-index: 50;
+    width: 50%;
+    clear: right;
+    margin: 0;
+    border-bottom: 4px solid $medium;
+  }
+}
+
+.lang-selector {
+  background-color: $dark;
+  font-weight: bold;
+  margin: 0 40% 0 $main-padding;
+  a {
+    display: block;
+    float:left;
+    color: $lang-select-text;
+    text-decoration: none;
+    padding: 0 10px;
+    line-height: 30px;
+    outline: 0;
+
+    &:active, &:focus {
+      background-color: $lang-select-pressed-bg;
+      color: $lang-select-pressed-text;
+    }
+
+    &.active {
+      background-color: $lang-select-active-bg;
+      color: $lang-select-active-text;
+    }
+  }
+
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// CONTENT STYLES
+////////////////////////////////////////////////////////////////////////////////
+// This is all the stuff with the light background in the left half of the page
+
+.content {
+  // to place content above the dark box
+  position: relative;
+  z-index: 30;
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>ul, &>ol, &>aside, &>dl {
+    padding: 0 $main-padding;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'Gobold';
+    text-transform: uppercase;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+  }
+
+  &>ul, &>ol {
+    padding-left: $main-padding + 15px;
+  }
+
+  // the div is the tocify hidden div for placeholding stuff
+  &>h1, &>h2, &>div {
+    //clear:both;
+  }
+
+  h1 {
+    @extend %header-font;
+    font-size: 30px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-bottom: $h1-margin-bottom;
+  }
+
+  div:first-child + h1 {
+    margin-top: 0;
+  }
+
+  h2 {
+    @extend %header-font;
+    font-size: 20px;
+    margin-top: 4em;
+    margin-bottom: 0;
+    border-top: 40px solid #EEE;
+    padding-top: 1.2em;
+    padding-bottom: 1.2em;
+    background-image: linear-gradient(to bottom, rgba(#fff, 0.6), rgba(#fff, 0));
+  }
+
+  h3 {
+    border-top: 10px solid #EEE;
+  }
+
+  // h2s right after h1s should bump right up
+  // against the h1s.
+  h1 + h2, h1 + div + h2 {
+    margin-top: $h1-margin-bottom * -1;
+    border-top: none;
+  }
+
+  h3, h4, h5, h6 {
+    @extend %default-font;
+    margin-top: 2.5em;
+    margin-bottom: 0.8em;
+  }
+
+  h3, h3 code, h4, h4 code {
+    font-size: 16px;
+  }
+
+  h5, h5 code, h6, h6 code {
+    font-size: 14px;
+  }
+
+  h4, h5, h6 {
+    &> span {
+      border-bottom: dashed 1px;
+      padding: 0 2px 3px 2px;
+      display: inline-block;
+    }
+  }
+
+  hr {
+    margin: 2em 0;
+    border-top: 2px solid $examples-bg;
+    border-bottom: 2px solid $main-bg;
+  }
+  .heading {
+    clear: left;
+
+    .left {
+      &>h1 {
+        border-top: solid 20px #EEE;
+      }
+      &>h4, &>h5, &>h6 {
+        padding: 0 0 0 25px;
+      }
+    }
+
+    h1 {
+      clear: both;
+    }
+
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  .right h1 {
+    /*background-image: linear-gradient(to bottom, #444, #444);
+    border-bottom: solid 1px #555;*/
+  }
+
+
+  table {
+    margin-bottom: 1em;
+    overflow: auto;
+    th,td {
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    th {
+      padding: 5px 10px;
+      border-bottom: 1px solid #ccc;
+      vertical-align: bottom;
+    }
+
+    td {
+      padding: 10px;
+    }
+
+    tr:last-child {
+      border-bottom: 1px solid #ccc;
+    }
+
+    tr:nth-child(odd)>td {
+      background-color: lighten($main-bg,4.2%);
+    }
+
+    tr:nth-child(even)>td {
+      background-color: lighten($main-bg,2.4%);
+    }
+  }
+
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    margin-left: 15px;
+  }
+
+  p, li, dt, dd {
+    line-height: 1.6;
+    margin-top: 0;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  code {
+    background-color: rgba(0,0,0,0.05);
+    padding: 3px;
+    border-radius: 3px;
+    @extend %break-words;
+    @extend %code-font;
+    word-break: normal;
+  }
+
+  pre>code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  aside {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 2em;
+    margin: 1em 0 0 0;
+    background: $light;
+    color: $dark;
+    line-height: 1.6;
+    position: relative;
+
+    &.warning {
+      //background-color: $aside-warning-bg;
+      background-color: #E08E79;
+      color: #F9EAEB;
+    }
+
+    &.success {
+      background-color: $medium;
+      color: $dark;
+    }
+  }
+
+  aside:before {
+    vertical-align: middle;
+    padding-right: 0.5em;
+    font-size: 14px;
+
+    position: absolute;
+    top: 24px;
+    left: 12px;
+  }
+
+  aside.notice:before {
+    @extend %icon-info-sign;
+  }
+
+  aside.warning:before {
+    @extend %icon-exclamation-sign;
+  }
+
+  aside.success:before {
+    @extend %icon-ok-sign;
+  }
+
+  .search-highlight {
+    padding: 2px;
+    margin: -2px;
+    border-radius: 4px;
+    border: 1px solid #F7E633;
+    background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// CODE SAMPLE STYLES
+////////////////////////////////////////////////////////////////////////////////
+// This is all the stuff that appears in the right half of the page
+
+.content {
+  padding-bottom: 40px;
+  max-width: 960px;
+  margin: 0 auto;
+
+  pre, blockquote {
+    background-color: $code-bg;
+    color: #ddd;
+
+    position: relative;
+
+    padding: 2em $main-padding;
+    margin: 10px 0 0 0;
+
+
+    box-sizing: border-box;
+
+    @extend %right-col;
+
+    &>p { margin: 0; }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: dashed 1px #ccc;
+    }
+  }
+
+  pre {
+    @extend %code-font;
+
+    &::after {
+      /*content: " ";*/
+      position: absolute;
+      background: #eaf2f6;
+      top: -3px;
+      left: -10px;
+      width: 20px;
+      z-index: 10000;
+      height: 20px;
+      transform: skew(-45deg, 0);
+    }
+  }
+
+  blockquote {
+    padding: 0 !important;
+  }
+
+  blockquote {
+    &>p {
+      background-color: $code-annotation-bg;
+      //border-radius: 5px;
+      padding: $code-annotation-padding;
+      color: #ccc;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #404040;
+    }
+  }
+
+
+
+  p {
+    margin-top: 20px;
+  }
+}
+
+// RESPONSIVE DESIGN
+////////////////////////////////////////////////////////////////////////////////
+// These are the styles for phones and tablets
+// There are also a couple styles disperesed
+
+@media (max-width: $tablet-width) {
+  .tocify-wrapper {
+    left: -$nav-width;
+
+    &.open {
+      left: 0;
+    }
+  }
+
+  .page-wrapper {
+    margin-left: 0;
+  }
+
+  #nav-button {
+    display: block;
+  }
+
+  .tocify-wrapper .tocify-item > a {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+  }
+}
+
+@media (max-width: $phone-width) {
+  .dark-box {
+    display: none;
+  }
+
+  %left-col {
+    margin-right: 0;
+  }
+
+  .tocify-wrapper .lang-selector {
+    display: block;
+  }
+
+  .page-wrapper .lang-selector {
+    display: none;
+  }
+
+  %right-col {
+    width: auto;
+    float: none;
+  }
+
+  %right-col + %left-col {
+    margin-top: $main-padding;
+  }
+}
+/** header **/
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, cit, code, del, dfn, em, ins, q, samp, small, strong, sub, sup, b, i, hr, dl, dt, dd, ol, ul, li, fieldset, legend, label {
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+div, span, object, iframe, img, table, caption, thead, tbody, tfoot, tr, tr, td, article, aside, canvas, details, figure, hgroup, menu, nav, footer, header, section, summary, mark, audio, video {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+ul, ol {
+  margin-left: 25px;
+}
+ul li, ol li {
+  padding-top: 5px;
+}
+li {
+  font-size: 1em;
+}
+
+@font-face {
+  font-family: 'kuzzle-icon';
+  src: url('/assets/fonts/kuzzle-icon.eot?-cyrvtz');
+  src: url('/assets/fonts/kuzzle-icon.eot?#iefix-cyrvtz') format('embedded-opentype'), url('/assets/fonts/kuzzle-icon.ttf?-cyrvtz') format('truetype'), url('/assets/fonts/kuzzle-icon.woff?-cyrvtz') format('woff'), url('/assets/fonts/kuzzle-icon.svg?-cyrvtz#kuzzle-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'icomoon';
+  src: url('/assets/fonts/icomoon.eot?-cyrvtz');
+  src: url('/assets/fonts/icomoon.eot?#iefix-cyrvtz') format('embedded-opentype'), url('/assets/fonts/icomoon.ttf?-cyrvtz') format('truetype'), url('/assets/fonts/icomoon.woff?-cyrvtz') format('woff'), url('/assets/fonts/icomoon.svg?-cyrvtz#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  position: relative;
+  height: 100%;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  background-color: $dark;
+  z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 9px;
+  width: 100%;
+}
+header .wrapper {
+  display: block;
+  position: relative;
+  padding: 20px 0;
+  background: $dark;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+header nav {
+  position: absolute;
+  right: 0;
+  display: inline-block;
+}
+header #logo {
+  display: inline-block;
+}
+header #logo a {
+  display: block;
+  width: 180px;
+  height: 60px;
+  background: no-repeat url("/assets/images/kuzzle-logo.png") 0 0;
+  text-decoration: none;
+}
+header .container-logo {
+  display: inline-block;
+  height: 100%;
+}
+header .container-logo img {
+  margin: 15px 15px 0 15px;
+}
+
+header nav ul {
+  margin-left: 25px;
+  margin-top: 5px;
+}
+header nav li {
+  min-height: 50px;
+  margin: 0 7px;
+  float: left;
+  position: relative;
+  display: block;
+  list-style: none;
+}
+header nav li a {
+  color: white;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-family: 'Gobold';
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  letter-spacing: 2px;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  line-height: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+header nav li a:after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #ffffff;
+  white-space: nowrap;
+  transition: 0.5s ease;
+}
+header nav li a:hover:after,
+header nav li a.active:after {
+  width: 100%;
+}
+header nav li:last-child a:after {
+  content: none;
+}
+
+header a {
+  line-height: 40px;
+  color: $dark;
+  font-weight: 700;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+header nav li.active span {
+  border-bottom: solid 6px $dark;
+  padding-bottom: 20px;
+}
+
+.developer-nav {
+  text-align: right;
+  padding-right: 100px;
+  font-size: 14px;
+  display: none;
+  border-top: solid 1px #004B52;
+  background: #ffffff;
+  height: 41px;
+}
+.developer-nav li.active span {
+  border-bottom: solid 3px $dark;
+  padding-bottom: 4px;
+}
+.developer-nav li:not(.active) a:hover span {
+  border-bottom: solid 3px $dark;
+  padding-bottom: 4px;
+}
+.developer-nav.open {
+  display: block;
+}
+.developer-nav li {
+  display: inline-block;
+  padding: 0 10px;
+}
+.developer-nav li a {
+  color: $dark;
+}
+
+/** header github **/
+
+.icon {
+  font-family: 'kuzzle-icon', 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 36px;
+  color: #FFFFFF;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon.icon-x-small {
+  font-size: 12px;
+}
+.icon.icon-small {
+  font-size: 18px;
+}
+.icon.icon-medium {
+  font-size: 26px;
+}
+.icon.icon-large {
+  font-size: 45px;
+}
+.icon.icon-yellow {
+  color: #EFC94C;
+}
+.icon.icon-light {
+  color: $medium;
+}
+.icon.icon-dark {
+  color: #004B52;
+}
+.icon.icon-grey {
+  color: #33393F;
+}
+.icon.icon-middle {
+  vertical-align: middle;
+}
+.icon.icon-sub {
+  vertical-align: sub;
+}
+.icon.icon-tooltip {
+  padding: 0 10px 0 10px;
+  display: inline-block;
+}
+.icon.icon-play_arrow:before {
+  content: "\e01b";
+}
+.icon.icon-download-alt:before {
+  content: "\e0ff";
+}
+.icon.icon-arrow-down:before {
+  content: "\e10f";
+}
+.icon.icon-arrow-up:before {
+  content: "\e112";
+}
+.icon.icon-menu:before {
+  content: "\e20e";
+}
+.icon.icon-code:before {
+  content: "\e284";
+}
+.icon.icon-settings_ethernet:before {
+  content: "\e2d1";
+}
+.icon.icon-reading:before {
+  content: "\e620";
+}
+.icon.icon-collaboration:before {
+  content: "\e616";
+}
+.icon.icon-diploma1:before {
+  content: "\e617";
+}
+.icon.icon-download2:before {
+  content: "\e618";
+}
+.icon.icon-external:before {
+  content: "\e619";
+}
+.icon.icon-info:before {
+  content: "\e61a";
+}
+.icon.icon-left-round:before {
+  content: "\e61b";
+}
+.icon.icon-left-arrow:before {
+  content: "\e61c";
+}
+.icon.icon-right-round:before {
+  content: "\e61b";
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  transform: scaleX(-1);
+  display: inline-block;
+}
+.icon.icon-right-arrow:before {
+  content: "\e61c";
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  transform: scaleX(-1);
+  display: inline-block;
+}
+.icon.icon-puzzle:before {
+  content: "\e61d";
+}
+.icon.icon-elasticsearch:before {
+  content: "\e620";
+}
+.icon.icon-checkmark:before {
+  content: "\e61e";
+}
+.icon.icon-contacts:before {
+  content: "\e61f";
+}
+.icon.icon-linkedin:before {
+  content: "\e615";
+}
+.icon.icon-cancel:before {
+  content: "\e614";
+}
+.icon.icon-quote-alt:before {
+  content: "\e613";
+}
+.icon.icon-alert:before {
+  content: "\e60f";
+}
+.icon.icon-bookmark:before {
+  content: "\e610";
+}
+.icon.icon-check:before {
+  content: "\e611";
+}
+.icon.icon-star:before {
+  content: "\e612";
+}
+.icon.icon-idea:before {
+  content: "\e60e";
+}
+.icon.icon-download:before {
+  content: "\e60d";
+}
+.icon.icon-ask:before {
+  content: "\e600";
+}
+.icon.icon-buisiness:before {
+  content: "\e601";
+}
+.icon.icon-doc:before {
+  content: "\e602";
+}
+.icon.icon-email:before {
+  content: "\e603";
+}
+.icon.icon-games:before {
+  content: "\e604";
+}
+.icon.icon-get-started:before {
+  content: "\e605";
+}
+.icon.icon-github:before {
+  content: "\e606";
+}
+.icon.icon-iot:before {
+  content: "\e607";
+}
+.icon.icon-mobile:before {
+  content: "\e608";
+}
+.icon.icon-quote:before {
+  content: "\e609";
+}
+.icon.icon-social-media:before {
+  content: "\e60a";
+}
+.icon.icon-twitter:before {
+  content: "\e60b";
+}
+.icon.icon-websites:before {
+  content: "\e60c";
+}
+.icon.icon-eye-plus:before {
+  content: "\e900";
+}
+
+.icon.icon-small {
+  font-size: 18px;
+}
+.icon.icon-github:before {
+  content: "\e606";
+}
+header nav ul li a.github {
+  border-radius: 100%;
+  padding: 11px 0px 9px 10px;
+  overflow: hidden;
+  background-color: $dark;
+}
+header nav ul li a.github .icon {
+  position: relative;
+  line-height: 27px;
+  font-size: 33px;
+}
+header nav ul li a.github:hover .icon:after {
+  opacity: 1;
+  -webkit-transform: translateY(20%);
+  -ms-transform: translateY(20%);
+  transform: translateY(20%);
+}
+header nav ul li a.github .icon:after {
+  color: transparent;
+  position: absolute;
+  left: -2px;
+  top: -1px;
+  font-size: 1.3em;
+  display: inline-block;
+  content: "\e0ff";
+  transition-duration: 0.3s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-name: hvr-icon-drop;
+  animation-name: hvr-icon-drop;
+  -webkit-transform: translateY(-160%);
+  -ms-transform: translateY(-160%);
+  transform: translateY(-160%);
+  opacity: 0;
+}
+.icon.icon-github:before {
+  content: "\e606";
+}
+header nav ul li a.github:hover .icon:before {
+  color: transparent;
+  opacity: 0;
+  -webkit-transform: translateY(160%);
+  -ms-transform: translateY(160%);
+  transform: translateY(160%);
+}
+header nav ul li a.github .icon:before {
+  display: inline-block;
+  -webkit-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-name: hvr-icon-drop;
+  animation-name: hvr-icon-drop;
+  opacity: 1;
+}
+header nav ul li a.github .icon:before,
+header nav ul li a.github .icon:after {
+  color: #FFFFFF;
+}
+
+/* code preview hack */
+.container .highlight .err {
+  color: #d0d0d0;
+  background: none;
+}
+
+/* toc hack */
+
+.container {
+  position: absolute;
+  top: 140px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.container .page-wrapper {
+  background-color: rgba(250, 250, 250, 1);
+}
+.container .page-wrapper .lang-selector {
+  border-bottom: 4px solid $dark;
+  margin-top: 20px;
+}
+.container .page-wrapper .dark-box {
+  background-color: #EEE;
+}
+.container .lang-selector a.active {
+  background: $medium;
+  color: $dark;
+}
+.container .tocify-wrapper {
+  top: 140px;
+  background: $light;
+  border-right: solid 10px #EEE;
+}
+.container .tocify-wrapper .search-results {
+  background: white;
+}
+.container .tocify-wrapper .search-results a {
+  color: #393939;
+}
+.container .tocify-wrapper .tocify-focus {
+  box-shadow: none;
+  color: #fff;
+  background-color: $dark;
+}
+.container .tocify-wrapper li {
+  color: #393939;
+}
+.container .tocify-wrapper > .search input {
+  background: #FFF;
+  color: #393939;
+}
+.container .tocify-wrapper > .search:before {
+  color: #333;
+}
+.container .tocify-wrapper .tocify-subheader  {
+  background: #FFF;
+}
+.container .tocify-wrapper .tocify-header.header-active  {
+  background: $dark;
+  color: #FFF;
+}
+.container .tocify-wrapper .tocify-header.header-active > .tocify-item  {
+  color: #FFF;
+  border-left: solid 4px $dark;
+}
+
+
+.heading-title {
+  border-left: solid 7px $dark;
+  padding-left: 10px;
+  display: inline-block;
+}
+h1 .heading-title {
+  border-left: solid 21px $dark;
+  font-weight: 800;
+}
+h2 .heading-title {
+  font-weight: 700;
+}
+h3 .heading-title {
+  border-left: dotted 3px;
+  font-weight: 700;
+}
+h4 .heading-title {
+  border-left: solid 3px #CCC;
+  padding-left: 10px !important;
+  border-bottom: none !important;
+  font-weight: 600;
+}
+h5 .heading-title {
+  border-left: dotted 3px #DDD;
+  padding-left: 10px !important;
+  border-bottom: none !important;
+  font-weight: 500;
+}
+.heading-links {
+  @extend %default-font;
+  display: inline-block;
+  padding: 0 20px 0 10px;
+  opacity: 0.5;
+  vertical-align: 5px;
+  text-transform: lowercase;
+}
+h2 .heading-links {
+  vertical-align: 2px;
+}
+h3 .heading-links {
+  vertical-align: 2px;
+}
+.heading-links:hover {
+  opacity: 1;
+}
+.heading-links a {
+  color: $dark;
+  text-decoration: none;
+  font-size: 12px;
+}
+.heading-links .icon {
+  color: $dark;
+  vertical-align: -2px;
+  margin-right: 5px;
+  font-size: 13px;
+  display: inline-block;
+}
+.tocify-wrapper .toc-footer li,
+.tocify-wrapper .toc-footer a {
+  color: $dark;
+}
+.version-selector {
+  padding: 10px 0 2px 14px;
+  opacity: 0.6;
+}
+.version-selector:hover {
+  opacity: 1;
+}
+.version-selector label {
+  font-size: 12px;
+}
+.content .heading-first h1 {
+  margin-top: 0;
+  border-top: 30px solid #EEE !important;
+}
+.content p, .content li, .content dt, .content dd {
+  color: #555;
+}
+
+
+.content table a,
+.content li a,
+.content p a {
+  @extend %link-font;
+}
+.content table a:visited,
+.content li a:visited,
+.content p a:visited {
+  @extend %link-font;
+}
+.content aside a:visited,
+.content aside a {
+  @extend %link-font;
+}
+
+.content .panels {
+  padding: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+.content .panel {
+  display: inline-block;
+  width: 50%;
+}
+.content .panel a {
+  text-decoration: none;
+  margin: 10px 20px 30px 20px;
+  display: block;
+  padding: 15px 25px;
+  border: solid 1px #DDD;
+  background-color: #FFF;
+  animation: 1s all;
+  box-shadow: 0;
+}
+.content .panel a:hover {
+  box-shadow: 2px 2px 12px 0 rgba(0, 0, 0, 0.2);
+}
+.content .panel-title {
+  color: #111;
+  text-decoration: none !important;
+  font-family: "Gobold";
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 20px;
+}
+.content .panel-title .icon {
+  color: $dark;
+  vertical-align: -8px;
+  margin-right: 7px;
+}
+.panel-content {
+  color: #555;
+  padding: 25px 0 10px 0;
+}
+.panel-content button {
+  display: block;
+  margin-top: 24px;
+  background-color: $medium;
+  color: $dark;
+  font-weight: 500;
+  width: 100%;
+  border: none;
+  padding: 7px 30px;
+}
+.search {
+  position: relative;
+  float: left;
+  padding: 6px 14px 2px 14px;
+
+  &:before {
+    position: absolute;
+    top: 15px;
+    left: $nav-padding;
+    color: $dark;
+    @extend %icon-search;
+  }
+}
+.search input {
+  background-color: #FFFFFF;
+  border: 0;
+  outline: none;
+  width: 450px;
+  margin-left: 17px;
+}
+.developer-nav > ul {
+  float: right;
+}
+#toc {
+  padding-top: 15px;
+}
+
+.gitter-open-chat-button {
+  background-color: $dark !important;
+}
+
+.highlight, .highlight .w {
+  background-color: $dark !important;
+}
+
+.tocify ul ul ul li {
+  padding-left: 15px;
+}

@@ -8,7 +8,7 @@ title: Authentication
 Kuzzle uses [PassportJS](http://PassportJS.org/) to enable authentication through a large amount of providers, for example:
 
 - local username/password authentication (enabled by default)
-- OAuth2 providers like GitHub or google (using (Oauth plugin)[https://GitHub.com/kuzzleio/kuzzle-plugin-auth-passport-oauth])
+- OAuth2 providers like GitHub or google (using [Oauth plugin](https://GitHub.com/kuzzleio/kuzzle-plugin-auth-passport-oauth))
 - SAML providers
 
 Remember the [Architecture overview](#core-architecture) and focus on the components involved by reading actions:

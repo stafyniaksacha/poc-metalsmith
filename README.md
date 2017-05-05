@@ -18,3 +18,17 @@
 - [https://github.com/metalsmith/awesome-metalsmith](https://github.com/metalsmith/awesome-metalsmith)
 - [https://www.npmjs.com/package/metalsmith-ancestry](https://www.npmjs.com/package/metalsmith-ancestry)
 - [http://handlebarsjs.com/](http://handlebarsjs.com/)
+
+
+### todo
+- [x] compile markdown
+- [x] compile sass
+- [x] custom layout
+- [x] livereload
+- [x] auto tree (reference the next, previous, parent and all children of a particular resource)
+- [ ] find a way to get sdk-exemples/api-reference working (with tabs / custom template / ...)
+- [ ] multi version capability ([we can use multi-language plugin](https://github.com/doup/metalsmith-multi-language))
+- [ ] generate table of content ([maybe this ?](https://github.com/majodev/metalsmith-headings-identifier))
+- [ ] client-side search [with lunr](https://github.com/CMClay/metalsmith-lunr)
+- [ ] try [discus](https://github.com/vitaliy-bobrov/metalsmith-disqus)
+- [ ] try content [fingerprint](https://github.com/christophercliff/metalsmith-fingerprint)

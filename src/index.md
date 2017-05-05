@@ -1,10 +1,8 @@
 ---
-layout: test.html
+layout: homepage.html
 title: documentation
 ---
 
-# index
-tatata
-aazazsdqs
-
-sdfsd
+---
+note: content is ignored here
+---
