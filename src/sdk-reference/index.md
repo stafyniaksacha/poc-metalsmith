@@ -4,6 +4,9 @@ title: SDK Reference
 order: 0
 description: The multi-language reference for all the Kuzzle SDK.
 icon: fa-briefcase
+customData:
+  - item1
+  - item2
 ---
 
 # sdk reference

@@ -20,12 +20,17 @@ const open = require('open');
 
 const port = 8080;
 
+//Register a new Metalsmith custom plugin
 function logger(options) {
+  // Initialize options
+
+  // Return a function that will be executed on files
   return function(files, metalsmith, done) {
     setImmediate(done)
 
     const paths = Object.keys(files)
 
+    // act on "files", update metadata  / contents ...
     for (let path of paths) {
       if (path.endsWith('.md')) {
         console.log("==============================")
@@ -33,8 +38,6 @@ function logger(options) {
         console.log(Object.keys(files[path]))
         console.log(Object.keys(files[path].ancestry))
       }
-    }
-
   }
 }
 
@@ -69,9 +72,7 @@ handlebars.registerHelper({
     }
 });
 
-/**
- * Build with metalsmith.
- */
+// Build site with metalsmith.
 const build = (clean = false) => (done) => {
   Metalsmith(__dirname)
     .metadata({
@@ -123,6 +124,7 @@ const build = (clean = false) => (done) => {
 };
 
 if (process.argv.indexOf('--dev') > -1) {
+  // run dev server (build & serv ./build directory on 8080 port & watch => rebuild on change)
   var serve = new nodeStatic.Server(__dirname + '/build');
 
   require('http').createServer((req, res) => {
@@ -136,6 +138,7 @@ if (process.argv.indexOf('--dev') > -1) {
     open('http://localhost:' + port);
   }
 } else {
+  // only build static site
   build(true)((error) => {
     if (error) {
       console.error(error)

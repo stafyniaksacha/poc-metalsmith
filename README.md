@@ -30,5 +30,6 @@
 - [ ] multi version capability ([we can use multi-language plugin](https://github.com/doup/metalsmith-multi-language))
 - [ ] generate table of content ([maybe this ?](https://github.com/majodev/metalsmith-headings-identifier))
 - [ ] client-side search [with lunr](https://github.com/CMClay/metalsmith-lunr)
+- [ ] try a [broken link checker](https://github.com/gchallen/code.metalsmith-linkcheck)
 - [ ] try [discus](https://github.com/vitaliy-bobrov/metalsmith-disqus)
 - [ ] try content [fingerprint](https://github.com/christophercliff/metalsmith-fingerprint)
