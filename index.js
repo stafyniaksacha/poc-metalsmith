@@ -38,6 +38,7 @@ function logger(options) {
         console.log(Object.keys(files[path]))
         console.log(Object.keys(files[path].ancestry))
       }
+    }
   }
 }
 
