@@ -12,6 +12,7 @@ const ancestry    = require('metalsmith-ancestry');
 const links       = require('metalsmith-relative-links');
 const hbtmd       = require('metalsmith-hbt-md');
 const sass        = require('metalsmith-sass');
+const linkcheck   = require('metalsmith-linkcheck');
 
 const handlebars = require('handlebars');
 const nodeStatic = require('node-static');
@@ -27,18 +28,19 @@ function logger(options) {
   // Return a function that will be executed on files
   return function(files, metalsmith, done) {
     setImmediate(done)
+    console.log("==============================", options)
 
-    const paths = Object.keys(files)
-
-    // act on "files", update metadata  / contents ...
-    for (let path of paths) {
-      if (path.endsWith('.md')) {
-        console.log("==============================")
-        console.log(path)
-        console.log(Object.keys(files[path]))
-        console.log(Object.keys(files[path].ancestry))
-      }
-    }
+    // const paths = Object.keys(files)
+    //
+    // // act on "files", update metadata  / contents ...
+    // for (let path of paths) {
+    //   if (path.endsWith('.md')) {
+    //     console.log("==============================")
+    //     console.log(path)
+    //     console.log(Object.keys(files[path]))
+    //     console.log(Object.keys(files[path].ancestry))
+    //   }
+    // }
   }
 }
 
@@ -74,8 +76,9 @@ handlebars.registerHelper({
 });
 
 // Build site with metalsmith.
-const build = (clean = false) => (done) => {
-  Metalsmith(__dirname)
+const build = (dev = false) => (done) => {
+  console.log('"?????"')
+  let metalsmith = Metalsmith(__dirname)
     .metadata({
       title: "My Static Site & Blog",
       description: "It's about saying »Hello« to the World.",
@@ -85,27 +88,30 @@ const build = (clean = false) => (done) => {
     .source('./src')
     .destination('./build') // does not work with 'dist' folder ...
     .clean(true) // false: does not rebuild templates
-    .use(changed())
+
+  if (dev) {
+    metalsmith.use(changed())
+  }
+
+  metalsmith
     .use(links())
     .use(ancestry({
       match: '**/*.md',
       sortBy: 'title'
     }))
     .use(sass({
-      //outputDir: 'assets/stylesheets/',
       sourceMap: true,
-      sourceMapContents: true   // This will embed all the Sass contents in your source maps.
+      sourceMapContents: true
     }))
-    // .use(cleanCSS({
-    //   files: 'assets/stylesheets/**/*.css',
-    //   cleanCSS: {
-    //     rebase: true
-    //   }
-    // }))
+    .use(cleanCSS({
+      files: 'assets/stylesheets/**/*.css',
+      cleanCSS: {
+        rebase: true
+      }
+    }))
     .use(hbtmd(handlebars, {
         pattern: '**/*.md'
     }))
-    .use(logger())
     .use(markdown())
     // .use(collect({
     //   pattern: ['**/*.md']
@@ -114,11 +120,26 @@ const build = (clean = false) => (done) => {
     .use(layouts({
       engine: 'handlebars',
     }))
-    .use(debug())
-    .use(livereload({ debug: true }))
-    .build((error, files) => {
+    .use(linkcheck({
+      verbose: true,
+      timeout: 5,
+      checkFile: '.linkcheck/.links_checked.json',
+      ignoreFile: '.linkcheck/links_ignore.json',
+      failFile: '.linkcheck/links_failed.json'
+    }))
+
+  if (dev) {
+    metalsmith
+      .use(debug())
+      .use(livereload({ debug: true }))
+  }
+
+  metalsmith.build((error, files) => {
       if (error) {
         console.error(error)
+        if (!dev) {
+          return done(error)
+        }
       }
       done()
     })
@@ -133,14 +154,14 @@ if (process.argv.indexOf('--dev') > -1) {
     req.resume();
   }).listen(port);
 
-  watch(__dirname + '/{src,layouts}/**/*', { ignoreInitial: false }, build(false));
+  watch(__dirname + '/{src,layouts}/{!.linkcheck,**}/*', { ignoreInitial: false }, build(true));
 
   if (process.argv.indexOf('--open') > -1) {
     open('http://localhost:' + port);
   }
 } else {
   // only build static site
-  build(true)((error) => {
+  build()((error) => {
     if (error) {
       console.error(error)
       return process.exit(1)

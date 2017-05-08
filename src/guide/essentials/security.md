@@ -3,11 +3,11 @@ layout: full.html
 title: Security
 ---
 
-## Security
+# Security
 
 Kuzzle provides a full set of functionalities to finely define the permissions for your data.
 
-### Fresh installation default rights.
+## Fresh installation default rights.
 
 When installing Kuzzle for the very first time, no default user is created and the Anonymous user is allowed to perform any action on the data. The only restriction is on the internal data storage used by Kuzzle to store its configuration.
 
@@ -15,7 +15,7 @@ Once a first admin user is created, either via the [Kuzzle Back Office](#create-
 
 You can then use the Back Office to administrate your user rights.
 
-### Authentication
+## Authentication
 
 The first step to secure your data is to be able to identify your users.
 Kuzzle ships by default with a local login/password strategy.
@@ -28,11 +28,11 @@ If the authentication request identifies an existing user, Kuzzle generates a [J
 More information on the login process <a href="/api-reference/#login">here</a>.
 </aside>
 
-### Permissions
+## Permissions
 
 Once you know who is connected, you need a way to grant your users with some privileges to control their access to data.
 
-#### Users, profiles and roles
+### Users, profiles and roles
 
 Kuzzle associates `users` to one or more `profiles`.  
 You can think to a `profile` as a user group. All the `users` that share the same `profile` will get the same privileges.
@@ -45,9 +45,9 @@ A `profile` is associated to a set of `roles`. Each `role` defines a set of perm
 
 In the simple example above, the *editor* profile is a superset of the *contributor* one, which, in turn, extends the *default* profile.
 
-`roles` and `profiles` can be edited in [Kuzzle Back Office](https://github.com/kuzzleio/kuzzle-bo).
+`roles` and `profiles` can be edited in [Kuzzle Back Office](https://github.com/kuzzleio/kuzzle-backoffice).
 
-#### Role definition
+### Role definition
 
 A `role` definition is a hierarchical JSON object in which permissions can be defined at `controller` and `action` level.
 
@@ -102,7 +102,7 @@ The example above is the permission definition set by Kuzzle for the Anonymous u
 
 In this example, the role grants the user with the permission to perform the `login`, `checkToken` and `getCurrentUser` actions of the `auth` controller.
 
-#### Profile definition
+### Profile definition
 
 A `profile` definition is a Javascript object that contains an array of policies, composed by a roleId and restrictions:
 
@@ -181,7 +181,7 @@ With this sample profiles:
   * all collections stored in index `index2`
   * collections `foo` and `bar` stored in index `index1`.
 
-##### Composition rules
+#### Composition rules
 
 In Kuzzle, permissions follow the [Whitelist](https://en.wikipedia.org/wiki/Whitelist) strategy, which means that **an action must be explicitly allowed** by at least one role of the user profile (including restrictions).
 
@@ -190,7 +190,7 @@ That means:
 * If a role allows it, the action is authorized, *even if another role denies it*.
 * If no role explicitly allows it, the action if denied, even if no role explicitly denies it as well.
 
-#### Actions permissions functions
+### Actions permissions functions
 
 So far, we've seen how to set permissions based on the user profile only.
 

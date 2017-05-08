@@ -14,7 +14,8 @@ If you are a Javascript or Android developer, you may first like to start by hav
 </aside>
 
 Welcome to the Kuzzle API Documentation!
-<!--
+
+---
 # guide index
 titi
 v
@@ -28,4 +29,5 @@ z
 a
 {{#ancestry.nextMember?}}
 [Next](ancestry.link.to ancestry.nextMember)
-{{/ancestry.nextMember?}} -->
+{{/ancestry.nextMember?}}
+---

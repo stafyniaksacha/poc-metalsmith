@@ -3,7 +3,7 @@ layout: full.html
 title: Data Validation
 ---
 
-## Data Validation
+# Data Validation
 
 One common need when you are dealing with data is validation. Every time you create new documents, update them or publish real-time messages, you may want to **check that their content meets a given set of criteria**.
 

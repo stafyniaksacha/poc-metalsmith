@@ -3,7 +3,7 @@ layout: full.html
 title: The Plugin System
 ---
 
-## The Plugin System
+# The Plugin System
 
 Being able to grab a full-feature backend and run it quickly is very convenient, but Kuzzle is about more than that. As soon as you start developing real-life applications that live out in the wild, you need to **extend your backend with your own business-logic**.
 That's quite legitimate: some logic is sensible and cannot live on the client.
@@ -15,11 +15,11 @@ To make sure Kuzzle fits whatever needs you might have, it includes a powerful *
 * use an existing plugin from the Kuzzle Plugins ecosystem (such as the [OAuth2 Authentication strategy](https://github.com/kuzzleio/kuzzle-plugin-auth-passport-oauth) or the [MQTT Protocol](https://github.com/kuzzleio/kuzzle-plugin-mqtt));
 * [create your own plugin](/plugin-reference/#writing-plugin-code) from scratch.
 
-### Plugin Types
+## Plugin Types
 
 There are three main Plugin types, each one has specific features.
 
-#### Core Plugins
+### Core Plugins
 
 They are the most common type of plugins and are meant to extend the Kuzzle Core features. They are plugged on the Kuzzle Core at startup and they share its execution thread. A Core Plugin can extend Kuzzle with the following features:
 
@@ -40,20 +40,20 @@ They are the most common type of plugins and are meant to extend the Kuzzle Core
   _Example - "Enable Kuzzle to authenticate users via the OAuth strategy"_
   Kuzzle ships with an Authentication Plugin already bundled in its Community Edition, the [Local Strategy Plugin](https://github.com/kuzzleio/kuzzle-plugin-auth-passport-local). Thanks to PassportJS, more than 300 authentication strategies are readily available.
 
-#### Worker Plugins
+### Worker Plugins
 
 [Workers Plugins](/plugin-reference#worker-plugins) are Core Plugins running on separate processes. The only feature they can add is to [asynchronously listen to data-related events](/plugin-reference#listener-plugins). They are useful when performing costly operations as they have no impact on Kuzzle performances.
 
 _Example - "Compute a complex data-mining operation and commit the result to a third-party Business-Intelligence platform every time a document is changed"._
 
-#### Protocol Plugins
+### Protocol Plugins
 
 [Protocol Plugins](/plugin-reference#protocol-plugins) extend Kuzzle networking capabilities by adding new network protocols.
 
 _Example - "Enable Kuzzle to interact with XMPP-oriented services"_
 Kuzzle ships with a Protocol Plugin already bundled in its Community Edition, the [MQTT Plugin](https://github.com/kuzzleio/kuzzle-plugin-mqtt).
 
-### Examples
+## Examples
 
 This example is a simplistic one: we are going to install the **Hello World Plugin**, adding a new API endpoint that simply... greets the client! Not very useful, except for the sake of this example.
 
@@ -116,6 +116,6 @@ Which means you can call the `http://localhost:7512/_plugin/kuzzle-plugin-hellow
 
 To get a deeper insight on how Plugins work in Kuzzle, please refer to the [Plugin Reference](/plugin-reference).
 
-### Managing Plugins
+## Managing Plugins
 
 To learn about how to manage or configure plugins, please check our [Plugin reference documentation].

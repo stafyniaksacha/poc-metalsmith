@@ -3,7 +3,7 @@ layout: full.html
 title: User
 ---
 
-# ~ User
+# User
 
 User is the object representation of an user, which is associated to a Profile object
 

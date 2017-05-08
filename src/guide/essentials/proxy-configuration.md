@@ -3,7 +3,7 @@ layout: full.html
 title: Configuring Kuzzle proxy
 ---
 
-## Configuring Kuzzle proxy
+# Configuring Kuzzle proxy
 
 The **complete default configuration** of Kuzzle proxy is stored in the [proxyrc file](https://github.com/kuzzleio/kuzzle-proxy/blob/master/.proxyrc.sample) at the root of the installation directory.
 
@@ -12,11 +12,11 @@ Kuzzle proxy uses [rc](https://github.com/dominictarr/rc) to **override** its de
 - via a `.proxyrc` file ([example here](https://github.com/kuzzleio/kuzzle-proxy/blob/master/.proxyrc.sample));
 - via environment variables prefixed with `proxy_`.
 
-### Logs
+## Logs
 
 Kuzzle proxy uses two loggers: one is dedicated to output `access` logs, the second one is in charge of outputing `errors`.
 
-#### Default configuration
+### Default configuration
 
 By default, on a fresh installation, Kuzzle proxy outputs both access and error logs to the console.  
 The default format for access logs mimics [Apache combined log format](https://httpd.apache.org/docs/current/logs.html#combined).
@@ -27,7 +27,7 @@ For protocols other than http, the verb is arbitrary set to _DO_ and the url is 
 ::ffff:172.23.0.1 - - [24/Apr/2017:14:02:19 +0000] "DO /server/now WEBSOCKET" 200 193 - -
 ```
 
-#### Custom logs configuration
+### Custom logs configuration
 
 Kuzzle proxy internally relies on [winston](https://github.com/winstonjs/winston) popular log library.
 
@@ -35,7 +35,7 @@ Any option given under `logs/<log type>/transport` will be passed as-is to Winst
 
 <aside class="warning">As Kuzzle proxy configuration is stored in text mode, any option where Winston would accept a function is not supported</aside>
 
-#### Supported transports
+### Supported transports
 
 Kuzzle proxy supports the following transports:
 
@@ -54,7 +54,7 @@ In addition to standard Winston options, Kuzzle proxy access logs accept two add
 | **accessLogFormat** | Accepted values: **combined** (default) or **logstash**. If set to **logstash**, access logs are outputed in `JSON` |
 | **accessLogIpOffset** | The offset starting from the right to extract the end-user ip address from the [`X-Forwarded-For`](https://en.wikipedia.org/wiki/X-Forwarded-For) header. This header is set by Kuzzle proxy protocols. The default value is _0_, which takes the last ip address from the header.<br>You may need to modify this value if Kuzzle is running behind a reverse proxy |
 
-#### Example - store logs to files
+### Example - store logs to files
 
 _.proxyrc_
 

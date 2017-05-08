@@ -3,7 +3,7 @@ layout: full.html
 title: Working with persistent data
 ---
 
-## Working with persistent data
+# Working with persistent data
 
 Kuzzle relies on [Elasticsearch](https://www.elastic.co/) to store and fetch persistent data.
 
@@ -13,7 +13,7 @@ In Kuzzle, data is organized in the following way:
 * Documents are grouped into **Collections**, identified by a unique name.
 * Collections are grouped into **Indexes**, identified by a unique name.
 
-### Document CRUD
+## Document CRUD
 
 Kuzzle ships with a full data [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API that enables you to operate in many ways on your documents.
 
@@ -278,7 +278,7 @@ Which gives, as a result, the following response:
 }
 ```
 
-### Document metadata
+## Document metadata
 
 When you create or update a document, Kuzzle adds metadata. These metadata describe the life-cycle of the document.
 They are available in the `_meta` part of a document:
@@ -372,7 +372,7 @@ Which gives, as a result, the following response:
 ```
 
 
-### Document mapping
+## Document mapping
 
 As previously said, Kuzzle relies on Elasticsearch to persist documents. Elasticsearch uses a mapping internally to match
 a document field to a field type. This mapping is attached to a `collection` (a `type` in Elasticsearch terminology).
@@ -418,7 +418,7 @@ you should almost always define mappings when creating collections, preferably b
 The syntax to use is the one defined by [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/5.x/mapping.html).
 
 
-#### Where do we go from here?
+### Where do we go from here?
 
 * Refer to the [Elasticsearch cookbook](#elasticsearch-cookbook) to get more details on how querying works in Kuzzle.
 * Keep track of the changes on your documents via the [Realtime Notifications](#realtime-notifications).

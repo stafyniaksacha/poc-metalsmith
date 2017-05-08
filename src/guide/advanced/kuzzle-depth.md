@@ -30,7 +30,7 @@ Kuzzle currently implements the following Services:
 * [redis.js](https://github.com/kuzzleio/kuzzle/blob/master/lib/services/redis.js): interface to the [redis](http://redis.io) cache server.
 * [proxyBroker.js](https://github.com/kuzzleio/kuzzle/blob/master/lib/services/proxyBroker.js): interface with the proxy.
 * [Broker Client and Server](https://github.com/kuzzleio/kuzzle/blob/master/lib/services/broker): implementation of the internal message broker.
-* [internalEngine.js](https://github.com/kuzzleio/kuzzle/blob/master/lib/services/internalEngine.js): light interface with the internal index (containing kuzzle's configuration) in Elastic Search.
+* [internalEngine](https://github.com/kuzzleio/kuzzle/blob/master/lib/services/internalEngine/index.js): light interface with the internal index (containing kuzzle's configuration) in Elastic Search.
 
 
 A Service can be added to different engines. For example, Redis is used by both the internalCache and the memoryStorage (see [default.config.js](https://github.com/kuzzleio/kuzzle/blob/master/default.config.js)).

@@ -1,0 +1,6 @@
+[
+    "http://localhost:3000",
+    "http://localhost:7512/",
+    "http://localhost:7512",
+    "http://localhost:7512?pretty=true"
+]

@@ -3,7 +3,7 @@ layout: full.html
 title: Role
 ---
 
-# ~ Role
+# Role
 
 Role is the object representation of a set of right policies.
 

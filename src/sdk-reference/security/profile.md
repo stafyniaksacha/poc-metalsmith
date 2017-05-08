@@ -3,7 +3,7 @@ layout: full.html
 title: Profile
 ---
 
-# ~ Profile
+# Profile
 
 Profile is the object representation of a profile, which is a set of one or many Role objects.
 

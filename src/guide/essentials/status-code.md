@@ -3,7 +3,7 @@ layout: full.html
 title: Request and Response format
 ---
 
-## Request and Response format
+# Request and Response format
 
 All transactions in Kuzzle are represented by a [Request](https://github.com/kuzzleio/kuzzle-common-objects#request) object. The object is created by the client to send a request to Kuzzle and returned by Kuzzle containing the response.
 
@@ -36,7 +36,7 @@ Let's take a look at the attributes of this object.
 * The `id` attribute bears a unique, auto-generated value that identifies the transaction.
 * The `timestamp` attribute stores the creation date (in seconds after the Epoch time).
 
-### Input
+## Input
 
 The `input` field contains all the parameters that express the request from the client. It has the following structure:
 
@@ -59,7 +59,7 @@ RequestInput {
 }
 ```
 
-### Context
+## Context
 
 The `context` attribute contains information about the state of the connection at the moment the request is sent. It has the following structure:
 
@@ -72,39 +72,39 @@ RequestContext {
 }
 ```
 
-### Status codes
+## Status codes
 
 The `status` attribute is a numeric code similar to [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 It is used to inform the client about the real status of his request (if an error occurred or not).
 
-#### List of status codes supported by Kuzzle
+### List of status codes supported by Kuzzle
 
-##### 1xx Processing
+#### 1xx Processing
 
 * `102`: Standard status for an unhandled request.
 
-##### 2xx Success
+#### 2xx Success
 
 * ``200``: Standard status for a successful request.
 * ``206``: The request (typically a bulk import) is partially successful, but some actions encountered an error.
 (in this case, error details are returned within _error.errors_)
 
-##### 4xx Client Error
+#### 4xx Client Error
 
 * ``400``: The request is malformed (usually: an argument is missing).
 * ``403``: The client is not allowed to perform the requested action.
 * ``404``: The requested resource cannot be found.
 
-##### 5xx Server Error
+#### 5xx Server Error
 
 * ``500``: Kuzzle encountered an unexpected error (standard code for internal error).
 * ``503``: An external service is unavailable
 
-### Error objects format
+## Error objects format
 
 When an error occurred, the `error` attribute contains [KuzzleError](https://github.com/kuzzleio/kuzzle-common-objects/blob/master/README.md#errorskuzzleerror) object, which inherits from the primitive Javascript `Error` type.
 
-### Life-cycle
+## Life-cycle
 
 Here is how it works.
 

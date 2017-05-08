@@ -3,7 +3,7 @@ layout: full.html
 title: Command Line Interface
 ---
 
-## Command Line Interface
+# Command Line Interface
 
 Kuzzle ships with a [Command line interface](https://en.wikipedia.org/wiki/Command-line_interface) which enables you to:
 

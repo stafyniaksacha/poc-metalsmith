@@ -3,7 +3,7 @@ layout: full.html
 title: Configuring Kuzzle
 ---
 
-## Configuring Kuzzle
+# Configuring Kuzzle
 
 The **complete default configuration** of Kuzzle is stored in the [kuzzlerc file](https://github.com/kuzzleio/kuzzle/blob/master/.kuzzlerc.sample) at the root of the installation directory.
 
