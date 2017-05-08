@@ -1567,7 +1567,9 @@ See the [Room object](#room) documentation for more information about these opti
 ### Return value
 
 Returns an object exposing the following method:  
-  ```onDone(callback)```
+```
+onDone(callback)
+```
 
 The `callback` argument is called when the subscription ends, either successfully or with an error.
 

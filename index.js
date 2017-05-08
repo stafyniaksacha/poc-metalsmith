@@ -1,26 +1,27 @@
-const Metalsmith  = require('metalsmith');
+const Metalsmith  = require('metalsmith')
+const handlebars = require('handlebars')
 
-const markdown    = require('metalsmith-markdown');
-const layouts     = require('metalsmith-layouts');
-const permalinks  = require('metalsmith-permalinks');
-const collect     = require('metalsmith-auto-collections');
-const debug       = require('metalsmith-debug');
-const changed     = require('metalsmith-changed');
-const livereload  = require('metalsmith-livereload');
-const cleanCSS    = require('metalsmith-clean-css');
-const ancestry    = require('metalsmith-ancestry');
-const links       = require('metalsmith-relative-links');
-const hbtmd       = require('metalsmith-hbt-md');
-const sass        = require('metalsmith-sass');
-const linkcheck   = require('metalsmith-linkcheck');
-const metalic     = require('metalsmith-metallic');
+const markdown    = require('metalsmith-markdown')
+const layouts     = require('metalsmith-layouts')
+const permalinks  = require('metalsmith-permalinks')
+const collect     = require('metalsmith-auto-collections')
+const debug       = require('metalsmith-debug')
+const changed     = require('metalsmith-changed')
+const livereload  = require('metalsmith-livereload')
+const cleanCSS    = require('metalsmith-clean-css')
+const ancestry    = require('metalsmith-ancestry')
+const links       = require('metalsmith-relative-links')
+const hbtmd       = require('metalsmith-hbt-md')
+const sass        = require('metalsmith-sass')
+const linkcheck   = require('metalsmith-linkcheck')
+const metalic     = require('metalsmith-metallic')
+const metatoc     = require('./metatoc')
 
-const handlebars = require('handlebars');
-const nodeStatic = require('node-static');
-const watch = require('glob-watcher');
-const open = require('open');
+const nodeStatic = require('node-static')
+const watch = require('glob-watcher')
+const open = require('open')
 
-const port = 8080;
+const port = 8080
 
 //Register a new Metalsmith custom plugin
 function logger(options) {
@@ -46,39 +47,39 @@ function logger(options) {
 }
 
 
+
 /**
  * Usefull handlebars helpers
  */
 handlebars.registerHelper({
     eq: function (v1, v2) {
-        return v1 === v2;
+        return v1 === v2
     },
     ne: function (v1, v2) {
-        return v1 !== v2;
+        return v1 !== v2
     },
     lt: function (v1, v2) {
-        return v1 < v2;
+        return v1 < v2
     },
     gt: function (v1, v2) {
-        return v1 > v2;
+        return v1 > v2
     },
     lte: function (v1, v2) {
-        return v1 <= v2;
+        return v1 <= v2
     },
     gte: function (v1, v2) {
-        return v1 >= v2;
+        return v1 >= v2
     },
     and: function (v1, v2) {
-        return v1 && v2;
+        return v1 && v2
     },
     or: function (v1, v2) {
-        return v1 || v2;
+        return v1 || v2
     }
-});
+})
 
 // Build site with metalsmith.
 const build = (dev = false) => (done) => {
-  console.log('"?????"')
   let metalsmith = Metalsmith(__dirname)
     .metadata({
       title: "My Static Site & Blog",
@@ -119,6 +120,7 @@ const build = (dev = false) => (done) => {
     //   pattern: ['**/*.md']
     // }))
     .use(permalinks())
+    .use(metatoc())
     .use(layouts({
       engine: 'handlebars',
     }))
@@ -145,21 +147,21 @@ const build = (dev = false) => (done) => {
       }
       done()
     })
-};
+}
 
 if (process.argv.indexOf('--dev') > -1) {
   // run dev server (build & serv ./build directory on 8080 port & watch => rebuild on change)
-  var serve = new nodeStatic.Server(__dirname + '/build');
+  var serve = new nodeStatic.Server(__dirname + '/build')
 
   require('http').createServer((req, res) => {
-    req.addListener('end', () => serve.serve(req, res));
-    req.resume();
-  }).listen(port);
+    req.addListener('end', () => serve.serve(req, res))
+    req.resume()
+  }).listen(port)
 
-  watch(__dirname + '/{src,layouts}/{!.linkcheck,**}/*', { ignoreInitial: false }, build(true));
+  watch(__dirname + '/{src,layouts}/{!.linkcheck,**}/*', { ignoreInitial: false }, build(true))
 
   if (process.argv.indexOf('--open') > -1) {
-    open('http://localhost:' + port);
+    open('http://localhost:' + port)
   }
 } else {
   // only build static site

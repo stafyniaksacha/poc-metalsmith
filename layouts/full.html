@@ -197,6 +197,16 @@
           {{/each}}
         </ul>
       </ul>
+      <ul  class="tocify-header">
+        <li class="tocify-item" class="tocify-item"><a>toc</a></li>
+        <ul class="tocify-subheader">
+          {{#each toc}}
+            <li class="tocify-item tocify-level-{{level}}">
+              <a style="color: #002835; text-decoration: none;" href="#{{ id }}" title="{{ title }}">{{ title }}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </ul>
       <ul class="toc-footer">
         <li><a href="http://kuzzle.io">Kuzzle official website</a></li>
         <li><a href="http://github.com/kuzzleio/kuzzle">Kuzzle on GitHub</a></li>
@@ -210,14 +220,18 @@
     <div class="content">
       <div style="padding:10px">
         <div style="text-align:left; float:left;">
-          {{#if ancestry.prevMember}}
-          <a href="/{{ ancestry.prevMember.path }}">Back to {{ ancestry.prevMember.title }}</a>
-          {{/if}}
+          <p>
+            {{#if ancestry.prevMember}}
+            <a href="/{{ ancestry.prevMember.path }}">« Back to {{ ancestry.prevMember.title }}</a>
+            {{/if}}
+          </p>
         </div>
         <div style="text-align:right; float:right;">
-          {{#if ancestry.nextMember}}
-          <a href="/{{ ancestry.nextMember.path }}">Continue reading with to {{ ancestry.nextMember.title }}</a>
-          {{/if}}
+          <p>
+            {{#if ancestry.nextMember}}
+            <a href="/{{ ancestry.nextMember.path }}">Continue reading with to {{ ancestry.nextMember.title }} »</a>
+            {{/if}}
+          </p>
         </div>
         <div style="clear:both"></div>
       </div>
@@ -226,14 +240,18 @@
 
       <div style="padding:10px">
         <div style="text-align:left; float:left;">
-          {{#if ancestry.prevMember}}
-          <a href="/{{ ancestry.prevMember.path }}">Back to {{ ancestry.prevMember.title }}</a>
-          {{/if}}
+          <p>
+            {{#if ancestry.prevMember}}
+            <a href="/{{ ancestry.prevMember.path }}">« Back to {{ ancestry.prevMember.title }}</a>
+            {{/if}}
+          </p>
         </div>
         <div style="text-align:right; float:right;">
-          {{#if ancestry.nextMember}}
-          <a href="/{{ ancestry.nextMember.path }}">Continue reading with to {{ ancestry.nextMember.title }}</a>
-          {{/if}}
+          <p>
+            {{#if ancestry.nextMember}}
+            <a href="/{{ ancestry.nextMember.path }}">Continue reading with to {{ ancestry.nextMember.title }} »</a>
+            {{/if}}
+          </p>
         </div>
         <div style="clear:both"></div>
       </div>
