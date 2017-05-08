@@ -13,6 +13,7 @@ const links       = require('metalsmith-relative-links');
 const hbtmd       = require('metalsmith-hbt-md');
 const sass        = require('metalsmith-sass');
 const linkcheck   = require('metalsmith-linkcheck');
+const metalic     = require('metalsmith-metallic');
 
 const handlebars = require('handlebars');
 const nodeStatic = require('node-static');
@@ -109,6 +110,7 @@ const build = (dev = false) => (done) => {
         rebase: true
       }
     }))
+    .use(metalic())
     .use(hbtmd(handlebars, {
         pattern: '**/*.md'
     }))

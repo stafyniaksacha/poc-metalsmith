@@ -187,5 +187,7 @@
     "https://redis.io/commands/zscore": "2017-05-08T16:14:00.524Z",
     "https://redis.io/commands/zunionstore": "2017-05-08T16:14:00.524Z",
     "https://github.com/kuzzleio/kuzzle/blob/master/lib/services/internalEngine/index.js": "2017-05-08T16:24:00.077Z",
-    "https://github.com/kuzzleio/kuzzle-backoffice": "2017-05-08T16:24:00.077Z"
+    "https://github.com/kuzzleio/kuzzle-backoffice": "2017-05-08T16:24:00.077Z",
+    "http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css": "2017-05-08T19:33:23.641Z",
+    "http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-dark.min.css": "2017-05-08T19:40:07.200Z"
 }

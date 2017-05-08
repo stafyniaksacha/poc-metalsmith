@@ -3,10 +3,10 @@
     "/plugin-reference/",
     "/real-time-filters/",
     "/elasticsearch-cookbook/",
-    "/api-reference/",
-    "/real-time-filters",
     "/validation-reference/",
     "/plugin-reference",
+    "/api-reference/",
+    "/real-time-filters",
     "/sdk-reference/guide/",
     "/sdk-reference/sdk-reference/"
 ]
