@@ -16,6 +16,7 @@ const sass        = require('metalsmith-sass')
 const linkcheck   = require('metalsmith-linkcheck')
 const metalic     = require('metalsmith-metallic')
 const metatoc     = require('./metatoc')
+const languageTab = require('./language-tab')
 
 const nodeStatic = require('node-static')
 const watch = require('glob-watcher')
@@ -89,7 +90,9 @@ const build = (dev = false) => (done) => {
     })
     .source('./src')
     .destination('./build') // does not work with 'dist' folder ...
-    .clean(true) // false: does not rebuild templates
+    .clean(true)
+
+  console.log('== Building site in ' + (dev ? 'dev' : 'prod') + ' mode ==');
 
   if (dev) {
     metalsmith.use(changed())
@@ -121,6 +124,7 @@ const build = (dev = false) => (done) => {
     // }))
     .use(permalinks())
     .use(metatoc())
+    .use(languageTab())
     .use(layouts({
       engine: 'handlebars',
     }))
@@ -139,6 +143,8 @@ const build = (dev = false) => (done) => {
   }
 
   metalsmith.build((error, files) => {
+    console.log('==== Build finished ====');
+
       if (error) {
         console.error(error)
         if (!dev) {

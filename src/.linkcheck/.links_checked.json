@@ -187,5 +187,6 @@
     "https://redis.io/commands/zrevrangebyscore": "2017-05-08T21:14:13.073Z",
     "https://redis.io/commands/zscan": "2017-05-08T21:14:13.073Z",
     "https://redis.io/commands/zscore": "2017-05-08T21:14:13.073Z",
-    "https://redis.io/commands/zunionstore": "2017-05-08T21:14:13.073Z"
+    "https://redis.io/commands/zunionstore": "2017-05-08T21:14:13.073Z",
+    "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js": "2017-05-09T12:36:50.073Z"
 }

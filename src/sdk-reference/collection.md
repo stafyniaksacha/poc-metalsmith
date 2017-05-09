@@ -1,5 +1,5 @@
 ---
-layout: full.html
+layout: side-code.html
 title: Collection
 ---
 

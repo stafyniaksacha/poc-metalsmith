@@ -1,8 +1,8 @@
 @charset "utf-8";
-@import 'normalize';
-@import 'variables';
-@import 'syntax';
-@import 'icon-font';
+@import '../normalize';
+@import '../variables';
+@import '../syntax';
+@import '../icon-font';
 @import 'default';
 
 
@@ -595,5 +595,51 @@ header {
        border-left: solid 4px $dark;
       }
     }
+  }
+}
+
+
+
+.language-tab {
+  display: none;
+
+  &.language-meta-tab,
+  &.language-tab-active {
+    display: block;
+  }
+}
+
+.language-tab-selector {
+  background-color: $dark;
+  font-weight: bold;
+  margin: 10px 0 -10px 0;
+  position: relative;
+  z-index: 50;
+  border-bottom: 4px solid $medium;
+
+  a {
+    display: block;
+    float:left;
+    color: $lang-select-text;
+    text-decoration: none;
+    padding: 0 10px;
+    line-height: 30px;
+    outline: 0;
+
+    &:active, &:focus {
+      background-color: $lang-select-pressed-bg;
+      color: $lang-select-pressed-text;
+    }
+
+    &.language-tab-active {
+      background-color: $lang-select-active-bg;
+      color: $lang-select-active-text;
+    }
+  }
+
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
   }
 }

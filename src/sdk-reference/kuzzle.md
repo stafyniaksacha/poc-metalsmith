@@ -1,5 +1,6 @@
 ---
 layout: full.html
+language-tab: true
 title: Kuzzle
 ---
 
