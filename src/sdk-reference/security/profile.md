@@ -1,5 +1,6 @@
 ---
-layout: full.html
+layout: side-code.html
+language-tab: true
 title: Profile
 ---
 

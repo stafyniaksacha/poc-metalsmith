@@ -171,6 +171,7 @@
                 <li class="tocify-item" class="tocify-item"><a>siblings</a></li>
                 <ul class="tocify-subheader">
                     {{#each ancestry.siblings}}
+
                     {{#if (eq path ../ancestry.firstMember.path)}}
                     <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
                     <!-- <ul  class="tocify-header">
@@ -196,6 +197,16 @@
                     {{#each ancestry.members}}
                     {{#if (eq path ../path)}}
                     <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
+
+                    <!-- <ul  class="tocify-header">
+                      <ul class="tocify-subheader">
+                        {{#each ../toc}}
+                        <li class="tocify-item tocify-level-{{level}}">
+                            <a style="color: #002835; text-decoration: none;" href="#{{ id }}" title="{{ title }}"> > {{ title }}</a>
+                        </li>
+                        {{/each}}
+                      </ul>
+                    </ul> -->
                     {{else}}
                     <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
                     {{/if}}
@@ -235,7 +246,7 @@
     <div class="page-wrapper">
         <div class="dark-box"></div>
         <div class="content">
-            <div style="padding:10px">
+            <div style="padding:10px; clear:both">
                 <div style="text-align:left; float:left;">
                     <p>
                         {{#if ancestry.prevMember}}
@@ -255,7 +266,7 @@
 
             {{{ contents }}}
 
-            <div style="padding:10px">
+            <div style="padding:10px; clear:both">
                 <div style="text-align:left; float:left;">
                     <p>
                         {{#if ancestry.prevMember}}

@@ -1,5 +1,6 @@
 ---
 layout: side-code.html
+language-tab: true
 title: Collection
 ---
 
