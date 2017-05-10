@@ -1,5 +1,6 @@
 const Metalsmith  = require('metalsmith')
 const handlebars = require('handlebars')
+const cheerio = require('cheerio')
 
 const markdown    = require('metalsmith-markdown')
 const layouts     = require('metalsmith-layouts')
@@ -25,6 +26,8 @@ const open = require('open')
 
 const port = 8080
 
+let algoliaPrivateKey
+
 //Register a new Metalsmith custom plugin
 function logger(options) {
   // Initialize options
@@ -48,7 +51,9 @@ function logger(options) {
   }
 }
 
-
+if (process.argv.indexOf('--algolia-private-key') > -1) {
+  algoliaPrivateKey = process.argv[process.argv.indexOf('--algolia-private-key') + 1]
+}
 
 /**
  * Usefull handlebars helpers
@@ -142,9 +147,58 @@ const build = (dev = false) => (done) => {
       .use(debug())
       .use(livereload({ debug: true }))
   }
-  else {
+
+  if (algoliaPrivateKey) {
     metalsmith
-      .use(algolia())
+      .use(algolia({
+        clearIndex: true,
+        projectId: '4RFBRWISJR',
+        privateKey: algoliaPrivateKey,
+        index: 'kuzzle-documentation',
+        fileParser: (file, data) => {
+          let objects = []
+          let $ = cheerio.load(data.contents.toString(), {
+            normalizeWhitespace: true
+          })
+          let content = $('.main-content')
+
+          // remove useless content
+          $('pre', content).remove()
+          $('blockquote', content).remove()
+          $('.language-tab-selector', content).remove()
+          $('table', content).remove()
+
+          objects.push({
+            objectID: data.path,
+            title: data.title,
+            path: data.path,
+            //content: content.text(),
+            parent: (data.ancestry.parent ? data.ancestry.parent.title : '')
+          })
+
+          for (let subpage of data.toc) {
+            if (data.toc.level === 1) {
+              continue
+            }
+
+            // get anchor wich is inside headers
+            let element = $(`#${subpage.id}`, content).parents('h1, h2, h3, h4, h5, h6')
+            let siblings = element.nextUntil('h1, h2, h3, h4, h5, h6')
+
+            objects.push({
+              objectID: subpage.path,
+              title: data.title,
+              subtitle: subpage.title,
+              path: data.path,
+              subpath: subpage.path,
+              content: siblings.text(),
+              parent: (data.ancestry.parent ? data.ancestry.parent.title : '')
+            })
+          }
+
+          return objects
+        }
+      }))
   }
 
   metalsmith.build((error, files) => {
