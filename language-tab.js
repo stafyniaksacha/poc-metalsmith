@@ -1,5 +1,4 @@
 const cheerio = require('cheerio')
-const util = require('util')
 
 /**
  *

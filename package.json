@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "algoliasearch": "^3.22.1",
     "bluebird": "^3.4.7",
     "cheerio": "^0.22.0",
     "glob-watcher": "^3.2.0",

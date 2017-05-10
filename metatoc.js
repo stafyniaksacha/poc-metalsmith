@@ -54,7 +54,7 @@ module.exports = function metatoc(options) {
         files[file].toc.push({
           level: level,
           order: index,
-          path: files[file].path + '#' + title,
+          path: files[file].path + '#' + id,
           id,
           title
         })

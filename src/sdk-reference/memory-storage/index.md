@@ -1,6 +1,7 @@
 ---
 layout: side-code.html
 language-tab: true
+algolia: true
 title: MemoryStorage
 ---
 

@@ -1,5 +1,6 @@
 ---
 layout: full.html
+algolia: true
 title: Data Validation
 ---
 

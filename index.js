@@ -17,6 +17,7 @@ const linkcheck   = require('metalsmith-linkcheck')
 const metalic     = require('metalsmith-metallic')
 const metatoc     = require('./metatoc')
 const languageTab = require('./language-tab')
+const algolia     = require('./algolia')
 
 const nodeStatic = require('node-static')
 const watch = require('glob-watcher')
@@ -140,6 +141,10 @@ const build = (dev = false) => (done) => {
     metalsmith
       .use(debug())
       .use(livereload({ debug: true }))
+  }
+  else {
+    metalsmith
+      .use(algolia())
   }
 
   metalsmith.build((error, files) => {
