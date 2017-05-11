@@ -30,7 +30,7 @@ The "Local" strategy (implemented by the [Passport Local Plugin](https://GitHub.
 
 * The user calls the `login` action of the Auth Controller:
 
-```javascripton
+```json
 {
   "controller": "auth",
   "action": "login",
@@ -51,7 +51,7 @@ The "Local" strategy (implemented by the [Passport Local Plugin](https://GitHub.
 
 Sample response:
 
-```javascripton
+```json
 {
   "status": 200,
   "error": null,
@@ -81,7 +81,7 @@ The authentication flow is a 2-step flow:
 
 * The user calls the `login` action of the Auth Controller:
 
-```javascripton
+```json
 {
   "controller": "auth",
   "action": "login",
@@ -95,7 +95,7 @@ The authentication flow is a 2-step flow:
 * The strategy calls a redirection to the OAuth2 Provider.
 * The Passport Wrapper intercepts the redirection request and formats a Kuzzle Response for the client:
 
-```javascripton
+```json
 {
   "headers":
   {
@@ -108,7 +108,7 @@ The authentication flow is a 2-step flow:
 
 * The Auth Controller sends the response to the client, with the redirection URL to the OAUth2 Provider:
 
-```javascripton
+```json
 {
   "action": "login",
   "controller": "auth",
@@ -143,7 +143,7 @@ Location: http://<kuzzle>/_login/GitHub?code=OAUTH2_CODE
   * either in HTTP, simply following the redirection `curl http://<kuzzle>/_login/GitHub?code=OAUTH2_CODE`
   * or, with another protocol (for example WebSocket), after having parsed the URL to get the authorization code:
 
-```javascripton
+```json
 {
   "controller": "auth",
   "action": "login",

@@ -1,0 +1,47 @@
+
+<!doctype html>
+<html>
+<head>
+  {{> common-meta }}
+
+  <title>Kuzzle Documentation</title>
+
+  <link href="/assets/stylesheets/category-childrens/screen.css" rel="stylesheet" type="text/css" media="screen" />
+
+</head>
+
+<body class="index">
+{{> header }}
+
+<div class="container">
+  <div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content" style="padding: 0">
+      {{> nav-siblings }}
+
+      <div class="main-content">
+        {{{ contents }}}
+        <div style="clear: both"></div>
+      </div>
+      <div class="categories">
+      <div class="panels">
+        {{#each ancestry.members}}
+          <div class="panel">
+            <a href="/{{ path }}">
+              <div class="panel-title"><i class="fa {{ icon }}"></i> {{ title }}</div>
+              <div class="panel-content">
+                <span>{{ description }}</span>
+              </div>
+            </a>
+          </div>
+        {{/each}}
+
+      </div>
+
+      {{> nav-siblings-bottom }}
+    <div class="dark-box">
+    </div>
+  </div>
+</div>
+</body>
+</html>

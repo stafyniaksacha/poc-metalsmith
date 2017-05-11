@@ -28,7 +28,7 @@
   <meta name="msapplication-wide310x150logo" content="/assets/images/favicon/mstile-310x150.png" />
   <meta name="msapplication-square310x310logo" content="/assets/images/favicon/mstile-310x310.png" />
 
-  <link href="/assets/stylesheets/homepage.css" rel="stylesheet" type="text/css" media="screen" />
+  <link href="/assets/stylesheets/category-childrens/screen.css" rel="stylesheet" type="text/css" media="screen" />
   <link rel="stylesheet" href="/assets/font-awesome/scss/font-awesome.css">
 
 </head>
@@ -43,7 +43,7 @@
     <nav>
       <ul>
         <li>
-          <a href="http://kuzzle.io/" class="nav-item">Home</a>
+          <a href="http://kuzzle.io/kuzzle-entreprise" class="nav-item">product</a>
         </li>
         <li>
           <a href="/" class="nav-item developers active">Documentation</a>
@@ -85,90 +85,23 @@
   <div class="page-wrapper">
     <div class="dark-box"></div>
     <div class="content">
-
-      <div class="panels">
-
-        {{#each ancestry.children}}
-          <div class="panel">
-            <a href="/guide">
-              <div class="panel-title"><i class="fa {{ icon }}"></i> {{ title }}</div>
-              <div class="panel-content">
-                <span>{{ description }}</span>
-              </div>
-            </a>
-          </div>
-        {{/each}}
-
-
-        <!-- <div class="panel">
-          <a href="/guide">
-            <div class="panel-title"><i class="fa fa-map"></i> Guide</div>
-            <div class="panel-content">
-              <span>Learn how to use Kuzzle.</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="panel">
-          <a href="/sdk-reference">
-            <div class="panel-title">
-              <span>
-                <i class="fa fa-briefcase"></i> SDK Reference
-              </span>
-            </div>
-            <div class="panel-content">
-              <span>The multi-language reference for all the Kuzzle SDK.</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="panel">
-          <a href="/real-time-filters">
-            <div class="panel-title"><i class="fa fa-commenting-o"></i> Real-time filters</div>
-            <div class="panel-content">
-              <span>The reference for the real-time subscription filtering DSL in Kuzzle.</span>
-            </div>
-          </a>
-        </div>
-
-
-
-        <div class="panel">
-          <a href="/validation-reference">
-            <div class="panel-title"><i class="fa fa-check"></i> Data Validation</div>
-            <div class="panel-content">
-              <span>The reference for the data-validation engine in Kuzzle.</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="panel">
-          <a href="/api-reference">
-            <div class="panel-title"><i class="fa fa-code"></i> API Reference</div>
-            <div class="panel-content">
-              <span>The multi-protocol reference for the public API exposed by the Kuzzle server.</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="panel">
-          <a href="/plugin-reference">
-            <div class="panel-title"><i class="fa fa-puzzle-piece"></i> Plugins</div>
-            <div class="panel-content">
-              <span>Learn how to create plugins that extend Kuzzle.</span>
-            </div>
-          </a>
-        </div>
-
-        <div class="panel">
-          <a href="/elasticsearch-cookbook">
-            <div class="panel-title"><i class="fa fa-book"></i> Elasticsearch Cookbook</div>
-            <div class="panel-content">
-              <span>Learn how to query persistent data in Kuzzle.</span>
-            </div>
-          </a>
-        </div> -->
+      <div class="main-content">
+        {{{ contents }}}
       </div>
+      <div class="categories">
+        <div class="panels">
+          {{#each ancestry.siblings}}
+            <div class="panel">
+              <a href="/{{ path }}">
+                <div class="panel-title"><i class="fa {{ icon }}"></i> {{ title }}</div>
+                <div class="panel-content">
+                  <span>{{ description }}</span>
+                </div>
+              </a>
+            </div>
+          {{/each}}
+
+        </div>
     <div class="dark-box">
     </div>
   </div>

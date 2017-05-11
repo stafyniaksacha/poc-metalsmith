@@ -20,28 +20,30 @@ If you are running Kuzzle in a Docker container, you will have to <a href="https
 ```bash
 $ ./bin/kuzzle
 
-  Usage: kuzzle [options] [command]
-
-
-  Commands:
-
-    createFirstAdmin          create the first administrator user
-    clearCache                clear internal caches in Redis
-    plugins [options] [name]  manage plugins
-    reset [options]           delete Kuzzle configuration and users from database
-    start [options]           start a Kuzzle instance
-    dump                      create a dump of current state of Kuzzle
-
-  Options:
-
-    -h, --help      output usage information
-    -V, --version   output the version number
-    -d, --debug     make errors more verbose
-    -C, --noColors  do not use ANSI coloring
+#  Usage: kuzzle [options] [command]
+#
+#
+#  Commands:
+#
+#    createFirstAdmin          create the first administrator user
+#    clearCache                clear internal caches in Redis
+#    plugins [options] [name]  manage plugins
+#    reset [options]           delete Kuzzle configuration and users from database
+#    start [options]           start a Kuzzle instance
+#    dump                      create a dump of current state of Kuzzle
+#
+#  Options:
+#
+#    -h, --help      output usage information
+#    -V, --version   output the version number
+#    -d, --debug     make errors more verbose
+#    -C, --noColors  do not use ANSI coloring
 
 ```
 
-### createFirstAdmin
+---
+
+## createFirstAdmin
 
 ```bash
 $ ./bin/kuzzle createFirstAdmin
@@ -53,7 +55,9 @@ The `createFirstAdmin` command lets you define an administrator user and set you
 
 <aside class="notice">NB: This command can only be run interactively</aside>
 
-### clearCache
+---
+
+## clearCache
 
 ```bash
 $ ./bin/kuzzle clearCache
@@ -61,55 +65,62 @@ $ ./bin/kuzzle clearCache
 
 Kuzzle relies on the Redis service to store some frequently accessed internal data. If you need to restart Kuzzle with a fresh cache, this command can come in hand.
 
-### reset
+---
 
-```
+## reset
+
+```bash
 $ ./bin/kuzzle reset --help
 
-    Usage: reset [options]
-
-    delete Kuzzle configuration and users from database
-
-    Options:
-
-      -h, --help             output usage information
-      --fixtures <fixtures>  import some fixtures from file
-      --mappings <mappings>  load and apply mappings from file
-      --noint                non interactive mode
+#    Usage: reset [options]
+#
+#    delete Kuzzle configuration and users from database
+#
+#    Options:
+#
+#      -h, --help             output usage information
+#      --fixtures <fixtures>  import some fixtures from file
+#      --mappings <mappings>  load and apply mappings from file
+#      --noint                non interactive mode
 ```
 
 The `reset` command deletes all currently set configurations and users from the database.
 
 If business data were imported in Kuzzle's database layer, these are kept intact.
 
-### start
+---
 
-```
+## start
+
+```bash
 $ ./bin/kuzzle start --help
 
-    Usage: start [options]
-
-    start a Kuzzle instance
-
-    Options:
-
-      -h, --help                 output usage information
-      -p, --port <port>          Kuzzle port number
-          --fixtures <fixtures>  import some fixtures from file
-          --mappings <mappings>  load and apply mappings from file
+#    Usage: start [options]
+#
+#    start a Kuzzle instance
+#
+#    Options:
+#
+#      -h, --help                 output usage information
+#      -p, --port <port>          Kuzzle port number
+#          --fixtures <fixtures>  import some fixtures from file
+#          --mappings <mappings>  load and apply mappings from file
 ```
 
 The `start` command starts a Kuzzle server in the foreground.
 
-### dump
+---
+
+## dump
 
 ```bash
 $ ./bin/kuzzle dump --help
-[ℹ] Creating dump file...
-[✔] Done!
 
-[ℹ] Dump has been successfully generated in "dump/20161214-1555-cli" folder
-[ℹ] You can send the folder to the kuzzle core team at support@kuzzle.io
+#   [ℹ] Creating dump file...
+#   [✔] Done!
+#   
+#   [ℹ] Dump has been successfully generated in "dump/20161214-1555-cli" folder
+#   [ℹ] You can send the folder to the kuzzle core team at support@kuzzle.io
 ```
 
 The `dump` command creates a snapshot of the state of Kuzzle. It includes

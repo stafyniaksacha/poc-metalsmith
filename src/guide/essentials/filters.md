@@ -10,6 +10,8 @@ Besides persisting data and retrieving it via advanced searches, Kuzzle enables 
 
 Live subscriptions are great to **keep track of the evolution** of a portion of your data you are interested in.
 
+---
+
 ## Introduction
 
 Imagine you are developing [a collaborative TO-DO list](http://kuzzle.io/demos-tutorials/real-time-collaborative-todo-list/) application. All the TO-DO items are persisted in Kuzzle (in a collection called `todos`) so, once the clients start, they fetch all the items via a simple document search.
@@ -27,6 +29,8 @@ The second solution is exactly what we are looking for and Kuzzle ships it nativ
 
 Our collaborative TO-DO list clients would subscribe to the `todos` collection (right after the first document search) in order to be notified _in real-time_ about new TO-DO items. This way, once Ann creates her new item, Tom and Matt see it immediately on their screen.
 
+---
+
 ## Concepts
 
 Real-time notifications are triggered by the [pub/sub mechanism](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) embedded in Kuzzle and follow the [Observer/Observable pattern](https://en.wikipedia.org/wiki/Observer_pattern), in which Kuzzle is the Observable and the client is the Observer.
@@ -42,6 +46,8 @@ Clients can subscribe to many types of notifications. Below are some examples:
 
 The scope of possibilities is huge. Take a look at the [Notifications section](/api-reference/?others#notifications) in the API Reference for more details.
 
+---
+
 ## Examples
 
 But, how does this work in Kuzzle? **How do we select the data that we want to subscribe to?**
@@ -51,6 +57,8 @@ Let's dive into the implementation of the Collaborative TO-DO list application.
 <aside class="notice">
 All the following examples are written in Javascript, therefore using the Javascript Kuzzle SDK. If this is not your usual development language, take a look at the different flavors of the `subscribe` method in the <a href="/sdk-reference/#subscribe">SDK Reference</a>).
 </aside>
+
+---
 
 ### The basic subscription
 
@@ -108,6 +116,8 @@ We won't analyze the other attributes for the moment. Take a look at the [Notifi
 
 This subscription is very handy and will notify Tom about the events 1, 2 and 3 of the list above (the `controller`, `action` and `result` will vary depending on the case). But what about the event number 4? How does Tom subscribe to items that only contain the word `URGENT` in their `label` field? Looks like a job for the [Real-time Filtering DSL](/real-time-filters/) coming up in the following section.
 
+---
+
 ### Subscription with filters
 
 Kuzzle ships with a powerful [Filtering DSL for Live Subscriptions](/real-time-filters/). It is heavily inspired in the Elasticsearch DSL and enables you to perform fine-grained selections on the documents you want to subscribe to.
@@ -138,6 +148,8 @@ There are a few things that deserve to be noticed here:
 * Tom will be notified even if he performs the actions himself (e.g. he is notified right after having created a new TO-DO item).
 
 The last point may seem a little bit inconvenient. What if Tom does not want to receive notifications when the event come from his own actions? Keep reading, the solution is right below.
+
+---
 
 ### Subscription with options
 

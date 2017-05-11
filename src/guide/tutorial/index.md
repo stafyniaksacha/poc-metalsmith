@@ -2,6 +2,7 @@
 layout: full.html
 algolia: true
 title: Tutorial
+order: 3
 ---
 
 # Tutorial

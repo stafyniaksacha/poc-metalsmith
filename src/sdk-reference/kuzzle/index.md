@@ -1,5 +1,5 @@
 ---
-layout: side-code.html
+layout: side-code-toc.html
 language-tab: true
 algolia: true
 title: Kuzzle

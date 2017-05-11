@@ -1,0 +1,23 @@
+<div class="nav-sibling bottom">
+  <div class="nav-left">
+    <p>
+      <a href="#">report an issue</a>
+      |
+      <a href="https://github.com/stafyniaksacha/poc-metalsmith/edit/master/src/{{ src }}">edit on github <i class="icon icon-github icon-small" style="color: #afafaf; font-size: 12px; vertical-align: text-bottom; margin-left: 6px;"></i></a>
+    </p>
+  </div>
+  <div class="nav-right">
+    <p>
+      {{#if ancestry.prevSibling}}
+      <a href="/{{ ancestry.prevSibling.path }}">« {{ ancestry.prevSibling.title }}</a>
+      {{/if}}
+      {{#if (and ancestry.prevSibling ancestry.nextSibling)}}
+       |
+      {{/if}}
+      {{#if ancestry.nextSibling}}
+      <a href="/{{ ancestry.nextSibling.path }}">{{ ancestry.nextSibling.title }} »</a>
+      {{/if}}
+    </p>
+  </div>
+  <div style="clear:both"></div>
+</div>

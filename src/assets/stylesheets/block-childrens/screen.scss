@@ -1,0 +1,47 @@
+@charset "utf-8";
+@import '../normalize';
+@import '../variables';
+@import '../syntax';
+@import '../icon-font';
+@import '../default';
+
+
+.container {
+  position: absolute;
+  top: 140px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .page-wrapper {
+    margin-left: 0;
+    background-color: #fafafa;
+  }
+}
+
+
+.content {
+  position: relative;
+  z-index: 30;
+  padding-bottom: 40px;
+  max-width: none;
+  background-color: none;
+
+  .panels {
+    padding: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+
+    a {
+      &:hover {
+        text-decoration: none !important;
+      }
+    }
+    .panel {
+      display: inline-block;
+      width: 33%;
+    }
+  }
+}

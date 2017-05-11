@@ -1,0 +1,92 @@
+<div class="tocify-wrapper">
+  <ul class="search-results"></ul>
+
+  <!-- <div id="version-selector">
+    <label>
+      select version:
+      <select>
+        <option value="/">v1.0.x (current)</option>
+        <option value="/v/edge">next</option>
+      </select>
+    </label>
+  </div> -->
+
+  <div id="toc" class="tocify">
+    <ul  class="tocify-header">
+      <li class="tocify-item tocify-focus tocify-hover"></li>
+    </ul>
+    <!-- <ul  class="tocify-header">
+      <li class="tocify-item" class="tocify-item"><a>members</a></li>
+      <ul class="tocify-subheader">
+        {{#each ancestry.members}}
+        {{#if (eq path ../path)}}
+        <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
+
+        <ul  class="tocify-header">
+          <ul class="tocify-subheader">
+            {{#each ../toc}}
+            <li class="tocify-item tocify-level-2">
+                <a style="color: #002835; text-decoration: none;" href="#{{ id }}" title="{{ title }}"> > {{ title }}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </ul>
+        {{else}}
+        <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
+        {{/if}}
+        {{/each}}
+      </ul>
+    </ul> -->
+    <ul  class="tocify-header">
+      <li class="tocify-item" class="tocify-item"><a style="color: #111; text-decoration: none;" href="/{{ ancestry.parent.path }}">{{ ancestry.parent.title }}</a></li>
+      <ul class="tocify-subheader">
+        {{#each ancestry.siblings}}
+
+        {{#if (eq path ../ancestry.firstMember.path)}}
+        <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
+          <ul  class="tocify-header">
+            <ul class="tocify-subheader">
+              {{#each ../ancestry.members}}
+                {{#if (or (eq path ../../path) (eq path ../path))}}
+                  <li class="tocify-item tocify-level-2 tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">&rsaquo; {{ title }}</a></li>
+                {{else}}
+                  <li class="tocify-item tocify-level-2"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">&rsaquo; {{ title }}</a></li>
+                {{/if}}
+              {{/each}}
+            </ul>
+          </ul>
+        {{else}}
+        <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
+        {{/if}}
+        {{/each}}
+      </ul>
+    </ul>
+    <!-- <ul  class="tocify-header">
+      <li class="tocify-item" class="tocify-item"><a>children</a></li>
+      <ul class="tocify-subheader">
+        {{#each ancestry.children}}
+        {{#if (eq path ../path)}}
+        <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
+        {{else}}
+        <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
+        {{/if}}
+        {{/each}}
+      </ul>
+    </ul> -->
+    <!-- <ul  class="tocify-header">
+      <li class="tocify-item" class="tocify-item"><a>toc</a></li>
+      <ul class="tocify-subheader">
+        {{#each toc}}
+        <li class="tocify-item tocify-level-{{level}}">
+            <a style="color: #002835; text-decoration: none;" href="#{{ id }}" title="{{ title }}">{{ title }}</a>
+        </li>
+        {{/each}}
+      </ul>
+    </ul> -->
+    <ul class="toc-footer">
+      <li><a href="http://kuzzle.io">Kuzzle official website</a></li>
+      <li><a href="http://github.com/kuzzleio/kuzzle">Kuzzle on GitHub</a></li>
+      <li><a href="http://github.com/tripit/slate">Documentation Powered by Slate</a></li>
+    </ul>
+  </div>
+</div>

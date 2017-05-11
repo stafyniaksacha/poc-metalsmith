@@ -1,0 +1,82 @@
+@charset "utf-8";
+@import '../normalize';
+@import '../variables';
+@import '../syntax';
+@import '../icon-font';
+@import '../default';
+
+
+.container {
+  position: absolute;
+  top: 140px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  .page-wrapper {
+    margin-left: 0;
+    padding-top: 1px;
+    background-color: #fafafa;
+  }
+}
+
+
+.content {
+  position: relative;
+  z-index: 30;
+  padding: 40px 0;
+  max-width: none;
+  margin: 50px 70px;
+
+  .main-content {
+    float: left;
+    width: 45%;
+
+    &> p {
+      padding: 5px 25px
+    }
+
+    &> table,
+    &> aside,
+    &> pre,
+    &> blockquote  {
+      margin: 45px
+    }
+
+    &> aside {
+      padding: 17px 35px;
+    }
+
+    &> pre {
+      border: solid 1px #e4e4e4;
+      background: #fbfbfb;
+    }
+  }
+
+  .category {
+    float: right;
+  }
+
+  .panels {
+    padding: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+
+    a {
+      &:hover {
+        text-decoration: none !important;
+      }
+    }
+    .panel {
+      display: inline-block;
+      width: 50%;
+
+      .panel-content {
+        color: #555;
+        padding: 10px 5px;
+      }
+    }
+  }
+}

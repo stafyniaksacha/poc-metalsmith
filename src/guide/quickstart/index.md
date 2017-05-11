@@ -2,11 +2,15 @@
 layout: full.html
 algolia: true
 title: Getting started
+description: learn kuzzle in a few steps
+order: 0
 ---
 
 # Getting started
 
 In this tutorial you will learn in a few steps how to **launch** Kuzzle and how to interact with it by **persisting data** and **being notified** when data is updated.
+
+---
 
 ## Running Kuzzle
 
@@ -73,6 +77,8 @@ Now that Kuzzle is running on your computer, you can dive into playing with it b
 <aside class="notice">
 You can also <a href="#installing-kuzzle-manually-on-linux">install Kuzzle manually</a>.
 </aside>
+
+---
 
 ## SDK play time
 

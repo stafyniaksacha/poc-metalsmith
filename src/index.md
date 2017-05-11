@@ -1,5 +1,5 @@
 ---
-layout: homepage.html
+layout: block-childrens.html
 title: documentation
 ---
 

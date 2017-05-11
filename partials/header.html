@@ -1,0 +1,39 @@
+<header>
+  <div class="wrapper">
+    <div id="logo">
+      <a href="http://kuzzle.io/">&nbsp;</a>
+    </div>
+
+    <nav>
+      <ul>
+        <li>
+          <a href="http://kuzzle.io/kuzzle-entreprise" class="nav-item">product</a>
+        </li>
+        <li>
+          <a href="/" class="nav-item developers active">Documentation</a>
+        </li>
+        <li>
+          <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
+        </li>
+        <li>
+          <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
+        </li>
+        <li>
+          <a href="http://kuzzle.io/contact/" class="nav-item ">Contact</a>
+        </li>
+        <li>
+          <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
+            <i class="icon icon-github icon-small"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="developer-nav open">
+    <ul>
+      {{#each ancestry.root.ancestry.children}}
+        <li><a href="/{{ path }}"><span>{{ title }}</span></a></li>
+      {{/each}}
+    </ul>
+  </div>
+</header>

@@ -1,5 +1,5 @@
 ---
-layout: full.html
+layout: category-childrens.html
 title: Guide
 order: 0
 description: Learn how to use Kuzzle
@@ -14,20 +14,3 @@ If you are a Javascript or Android developer, you may first like to start by hav
 </aside>
 
 Welcome to the Kuzzle API Documentation!
-
----
-# guide index
-titi
-v
-{{#ancestry.children}}
-* [{{title}}]({{link.from ancestry.parent}}) - {{summary}}
-{{/ancestry.children}}
-z
-{{#ancestry.previousMember?}}
-[Previous](ancestry.link.to ancestry.previousMember)
-{{/ancestry.previousMember?}}
-a
-{{#ancestry.nextMember?}}
-[Next](ancestry.link.to ancestry.nextMember)
-{{/ancestry.nextMember?}}
----

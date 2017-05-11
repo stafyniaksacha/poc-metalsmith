@@ -189,5 +189,7 @@
     "https://redis.io/commands/zscore": "2017-05-10T08:23:04.038Z",
     "https://redis.io/commands/zunionstore": "2017-05-10T08:23:04.038Z",
     "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js": "2017-05-10T13:42:56.241Z",
-    "https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js": "2017-05-10T08:23:04.038Z"
+    "https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js": "2017-05-10T08:23:04.038Z",
+    "http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css": "2017-05-10T23:33:19.844Z",
+    "http://kuzzle.io/kuzzle-entreprise": "2017-05-11T00:23:07.891Z"
 }

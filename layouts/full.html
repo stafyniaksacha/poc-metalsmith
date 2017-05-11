@@ -1,36 +1,13 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="google-site-verification" content="luspUdq52gkUU0FFChQ2xmeXSs5HDafpARQ7fVXVBp4" />
+  {{> common-meta }}
+
   <title>{{ title }} - Kuzzle Documentation</title>
 
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/images/favicon/apple-touch-icon-57x57.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/images/favicon/apple-touch-icon-114x114.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/images/favicon/apple-touch-icon-72x72.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/favicon/apple-touch-icon-144x144.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/images/favicon/apple-touch-icon-60x60.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/images/favicon/apple-touch-icon-120x120.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/images/favicon/apple-touch-icon-76x76.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/images/favicon/apple-touch-icon-152x152.png" />
-  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-196x196.png" sizes="196x196" />
-  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-16x16.png" sizes="16x16" />
-  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-128.png" sizes="128x128" />
-  <meta name="msapplication-TileColor" content="#FFFFFF" />
-  <meta name="msapplication-TileImage" content="/assets/images/favicon/mstile-144x144.png" />
-  <meta name="msapplication-square70x70logo" content="/assets/images/favicon/mstile-70x70.png" />
-  <meta name="msapplication-square150x150logo" content="/assets/images/favicon/mstile-150x150.png" />
-  <meta name="msapplication-wide310x150logo" content="/assets/images/favicon/mstile-310x150.png" />
-  <meta name="msapplication-square310x310logo" content="/assets/images/favicon/mstile-310x310.png" />
-
   <link href="/assets/stylesheets/full/screen.css" rel="stylesheet" type="text/css" media="screen" />
-  <link rel="stylesheet" href="/assets/font-awesome/scss/font-awesome.css">
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css">
 
   <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -57,55 +34,7 @@
 </head>
 
 <body class="index">
-<header>
-  <div class="wrapper">
-    <div id="logo">
-      <a href="http://kuzzle.io/">&nbsp;</a>
-    </div>
-
-    <nav>
-      <ul>
-        <li>
-          <a href="http://kuzzle.io/" class="nav-item">Home</a>
-        </li>
-        <li>
-          <a href="/" class="nav-item developers active">Documentation</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/demos-tutorials/" class="nav-item ">Demos</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/blog/" class="nav-item ">Blog</a>
-        </li>
-        <li>
-          <a href="http://kuzzle.io/contact/" class="nav-item ">Contact</a>
-        </li>
-        <li>
-          <a href="https://github.com/kuzzleio/kuzzle" target="_blank" class="nav-item github">
-            <i class="icon icon-github icon-small"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="developer-nav open">
-    <ul>
-      {{#each ancestry.root.ancestry.children}}
-        <li><a href="/{{ path }}"><span>{{ title }}</span></a></li>
-      {{/each}}
-      <!-- <li><a href="/guide/"><span>Guide</span></a></li>
-      <li><a href="/sdk-reference/"><span>SDK</span></a></li>
-      <li><a href="/real-time-filters/"><span>Real-time filters</span></a></li>
-      <li><a href="/validation-reference/"><span>Data Validation</span></a></li>
-      <li><a href="/api-reference/"><span>API</span></a></li>
-      <li><a href="/plugin-reference/"><span>Plugins</span></a></li>
-      <li><a href="/elasticsearch-cookbook/"><span>Elasticsearch Cookbook</span></a></li> -->
-    </ul>
-    <div class="search">
-      <input type="text" class="search" id="input-search" tabindex="1" placeholder="Search in the guide">
-    </div>
-  </div>
-</header>
+{{> header }}
 
 <!--
   <h1><a href="/{{ path }}">{{ title }}</a></h1>
@@ -139,141 +68,32 @@
   </ul> -->
 
 <div class="container">
-  <div class="tocify-wrapper">
-    <ul class="search-results"></ul>
-
-    <div id="version-selector">
-      <label>
-        select version:
-        <select>
-          <option value="/">v1.0.x (current)</option>
-          <option value="/v/edge">next</option>
-        </select>
-      </label>
-    </div>
-
-    <div id="toc" class="tocify">
-      <!-- <ul id="tocify-header1" class="tocify-header">
-        <li class="tocify-item" data-unique="getting-started" style="cursor: pointer;"><a>Getting started</a></li>
-        <ul class="tocify-subheader" data-tag="2">
-          <li class="tocify-item" data-unique="running-kuzzle"><a>Running Kuzzle</a></li>
-          <li class="tocify-item" data-unique="sdk-play-time"><a>SDK play time</a></li>
-          <ul class="tocify-subheader" data-tag="3">
-            <li class="tocify-item" data-unique="create-your-first-quot-hello-world-quot-document"><a>Create your first “Hello World” document</a></li>
-            <li class="tocify-item" data-unique="subscribe-to-data-changes-pub-sub"><a>Subscribe to data changes (pub/sub)</a></li>
-          </ul>
-        </ul>
-      </ul>
-    </div> -->
-
-      <ul  class="tocify-header">
-        <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ ancestry.parent.path }}">< back to {{ ancestry.parent.title }}</a></li>
-        <li class="tocify-item" class="tocify-item"><a>siblings</a></li>
-        <ul class="tocify-subheader">
-          {{#each ancestry.siblings}}
-            {{#if (eq path ../ancestry.firstMember.path)}}
-              <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-              <!-- <ul  class="tocify-header">
-                <ul class="tocify-subheader">
-                  {{#each ../ancestry.members}}
-                    {{#if (or (eq path ../../path) (eq path ../path))}}
-                      <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-                    {{else}}
-                      <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-                    {{/if}}
-                  {{/each}}
-                </ul>
-              </ul> -->
-            {{else}}
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-            {{/if}}
-          {{/each}}
-        </ul>
-      </ul>
-      <ul  class="tocify-header">
-        <li class="tocify-item" class="tocify-item"><a>members</a></li>
-        <ul class="tocify-subheader">
-          {{#each ancestry.members}}
-            {{#if (eq path ../path)}}
-              <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-            {{else}}
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-            {{/if}}
-          {{/each}}
-        </ul>
-      </ul>
-      <ul  class="tocify-header">
-        <li class="tocify-item" class="tocify-item"><a>children</a></li>
-        <ul class="tocify-subheader">
-          {{#each ancestry.children}}
-            {{#if (eq path ../path)}}
-              <li class="tocify-item tocify-focus tocify-hover"><a style="color: #FFF; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-            {{else}}
-              <li class="tocify-item"><a style="color: #002835; text-decoration: none;" href="/{{ path }}">{{ title }}</a></li>
-            {{/if}}
-          {{/each}}
-        </ul>
-      </ul>
-      <ul  class="tocify-header">
-        <li class="tocify-item" class="tocify-item"><a>toc</a></li>
-        <ul class="tocify-subheader">
-          {{#each toc}}
-            <li class="tocify-item tocify-level-{{level}}">
-              <a style="color: #002835; text-decoration: none;" href="#{{ id }}" title="{{ title }}">{{ title }}</a>
-            </li>
-          {{/each}}
-        </ul>
-      </ul>
-      <ul class="toc-footer">
-        <li><a href="http://kuzzle.io">Kuzzle official website</a></li>
-        <li><a href="http://github.com/kuzzleio/kuzzle">Kuzzle on GitHub</a></li>
-        <li><a href="http://github.com/tripit/slate">Documentation Powered by Slate</a></li>
-      </ul>
-    </div>
-  </div>
+  {{> nav-left }}
 
   <div class="page-wrapper">
+    <div class="toc">
+      <ul>
+        {{#each toc}}
+        <li class="toc-item toc-level-{{level}}">
+            <a href="#{{ id }}" title="{{ title }}">{{ title }}</a>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+
     <div class="dark-box"></div>
     <div class="content">
-      <div style="padding:10px; clear:both">
-        <div style="text-align:left; float:left;">
-          <p>
-            {{#if ancestry.prevMember}}
-            <a href="/{{ ancestry.prevMember.path }}">« Back to {{ ancestry.prevMember.title }}</a>
-            {{/if}}
-          </p>
-        </div>
-        <div style="text-align:right; float:right;">
-          <p>
-            {{#if ancestry.nextMember}}
-            <a href="/{{ ancestry.nextMember.path }}">Continue reading with to {{ ancestry.nextMember.title }} »</a>
-            {{/if}}
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
+
+      {{> nav-members }}
 
       <div class="main-content">
         {{{ contents }}}
+        <div style="clear: both"></div>
       </div>
 
-      <div style="padding:10px; clear:both">
-        <div style="text-align:left; float:left;">
-          <p>
-            {{#if ancestry.prevMember}}
-            <a href="/{{ ancestry.prevMember.path }}">« Back to {{ ancestry.prevMember.title }}</a>
-            {{/if}}
-          </p>
-        </div>
-        <div style="text-align:right; float:right;">
-          <p>
-            {{#if ancestry.nextMember}}
-            <a href="/{{ ancestry.nextMember.path }}">Continue reading with to {{ ancestry.nextMember.title }} »</a>
-            {{/if}}
-          </p>
-        </div>
-        <div style="clear:both"></div>
-      </div>
+      {{> disqus }}
+
+      {{> nav-members-bottom }}
     </div>
   </div>
 </div>

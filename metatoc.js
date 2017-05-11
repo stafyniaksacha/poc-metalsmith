@@ -15,6 +15,7 @@ module.exports = function metatoc(options) {
 
       // load contents with cheerio to parse html nodes
       let $ = cheerio.load(data.contents.toString())
+      // $('code').removeClass('hljs')
 
       if (!file.endsWith('.html')) {
         continue

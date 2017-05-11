@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  {{> common-meta }}
+
+  <title>{{ title }} - Kuzzle Documentation</title>
+
+  <link href="/assets/stylesheets/full/screen.css" rel="stylesheet" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/atom-one-light.min.css">
+
+  <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearchLite.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    $(document).ready(() => {
+      $('.language-tab-selector a').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var language = $(this).data('languageName')
+
+        $('.language-tab-active').removeClass('language-tab-active')
+        $('.language-tab-selector a[data-language-name="' + language + '"]').addClass('language-tab-active')
+        $('.language-tab[data-language="' + language + '"]').addClass('language-tab-active')
+      })
+    })
+  </script>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="/assets/javascripts/lib/_energize.js"></script>
+  <script src="/assets/javascripts/app/_lang.js"></script>
+  <script src="/assets/javascripts/app/_search.js"></script>
+  <script src="/assets/javascripts/app/_toc.js"></script> -->
+</head>
+
+<body class="index">
+{{> header }}
+
+<!--
+  <h1><a href="/{{ path }}">{{ title }}</a></h1>
+
+  <p> {{{ description  }}}</p>
+  <p> / {{ ancestry.path }} </p>
+ -->
+
+  <!-- <ul>
+    <li><a href="/{{ link.to ancestry.root }}">home</a></li>
+
+    {{#each ancestry.root.ancestry.children}}
+      <li><a href="/{{ path }}">{{ title }}</a></li>
+    {{/each}}
+  </ul>
+
+  <ul>
+    <li><a href="/{{ ancestry.parent.path }}">back to {{ ancestry.parent.title }}</a></li>
+    <li>siblings</li>
+    {{#each ancestry.siblings}}
+      <li><a href="/{{ path }}">{{ title }} to /{{ link.from ancestry.parent }}</a></li>
+    {{/each}}
+    <li>members</li>
+    {{#each ancestry.members}}
+      <li><a href="/{{ path }}">{{ title }} to /{{ link.from ancestry.parent }}</a></li>
+    {{/each}}
+    <li>children</li>
+    {{#each ancestry.children}}
+      <li><a href="/{{ path }}">{{ title }} to /{{ link.from ancestry.parent }}</a></li>
+    {{/each}}
+  </ul> -->
+
+<div class="container">
+  {{> nav-left-toc }}
+
+  <div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+      {{> nav-members }}
+
+      <div class="main-content">
+        {{{ contents }}}
+        <div style="clear: both"></div>
+      </div>
+
+      {{> disqus }}
+
+      {{> nav-members-bottom }}
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
