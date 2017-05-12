@@ -3,13 +3,13 @@
 `npm install`
 > install dependencies
 
-`node index.js`
+`node index.js --gzip`
 > builds src into build/ folder
 
-`node index.js --dev`
-> bind a webserver on 8080 with livereload
+`node index.js --dev --watch`
+> bind a webserver on 8080 with livereload and watch enabled
 
-`DEBUG=* node index.js --dev --open`
+`DEBUG=* node index.js --dev --watch --open`
 > bind a webserver on 8080 with livereload, open a browser and turn on debug messages
 
 
@@ -31,5 +31,5 @@
 - [x] generate table of content ~([maybe this ?](https://github.com/majodev/metalsmith-headings-identifier))~
 - [ ] ~client-side search [with lunr](https://github.com/CMClay/metalsmith-lunr)~
 - [x] try a [broken link checker](https://github.com/gchallen/code.metalsmith-linkcheck)
-- [ ] try [discus](https://github.com/vitaliy-bobrov/metalsmith-disqus)
+- [x] try [discus](https://github.com/vitaliy-bobrov/metalsmith-disqus)
 - [ ] ~try content [fingerprint](https://github.com/christophercliff/metalsmith-fingerprint)~

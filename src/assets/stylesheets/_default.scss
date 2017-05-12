@@ -260,6 +260,7 @@ html, body {
   z-index: 10;
   background-color: $main-bg;
   min-height: 100%;
+  font-size: 14px;
 
   padding-bottom: 1px; // prevent margin overflow
 
@@ -397,8 +398,8 @@ html, body {
   }
 
   h1 {
-    font-family: 'Gobold';
-    text-transform: uppercase;
+    font-family: 'Ubuntu', sans-serif;
+    // text-transform: uppercase;
   }
   h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
@@ -632,6 +633,11 @@ html, body {
   margin: 0 auto;
 
   .main-content {
+
+    p, li, dt, dd {
+      color: #555;
+    }
+
     padding-bottom: 40px;
 
     a[href^="http"]::after {
@@ -727,21 +733,21 @@ html, body {
 
   h1 {
     border-left: solid 21px $dark;
-    font-weight: 800;
+    font-weight: 500;
   }
   h2{
-    font-weight: 700;
+    font-weight: 500;
     border-left: solid 5px #002835;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
   }
   h3 {
     border-left: dotted 3px;
-    font-weight: 700;
+    font-weight: 500;
   }
   h4 {
     border-left: solid 3px #CCC;
-    font-weight: 600;
+    font-weight: 500;
   }
   h5 {
     border-left: dotted 3px #DDD;

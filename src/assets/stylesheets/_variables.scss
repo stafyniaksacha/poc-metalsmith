@@ -81,14 +81,14 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 %default-font {
   font-family: 'Ubuntu', 'Arial', monospace;
   color: $dark;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 100;
 }
 
 %header-font {
   @extend %default-font;
-  font-family: 'Gobold', 'Arial', sans-serif;
-  text-transform: uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  //text-transform: uppercase;
 }
 
 %code-font {
